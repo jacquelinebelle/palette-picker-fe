@@ -1,0 +1,82 @@
+.background {
+    background-color: #FAFAFA;
+    overflow: hidden;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -1;
+    
+}
+
+.ellipse {
+    background: #F8E1E7;
+    border-radius: 50%;
+    bottom: -100px;
+    height: 470px;
+    left: 55px;
+    position: absolute;
+    width: 482px;
+}
+
+.triangle {
+    border-left: 137px solid transparent;
+    border-right: 137px solid transparent;
+    border-bottom: 250px solid #FBD6C6;
+    height: 0;
+    position: absolute;
+    right: 295px;
+    top: -10px;
+    transform: rotate(-69.71deg);
+    width: 0;
+}
+
+.hexagon {
+    width: 130px;
+    height: 73px;
+    background: #C5D9F7;
+    position: absolute;
+    top: 110px;
+    transform: rotate(-62deg);
+    left: 206px;
+  }
+  .hexagon:before {
+    content: "";
+    position: absolute;
+    top: -45px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 65px solid transparent;
+    border-right: 65px solid transparent;
+    border-bottom: 45px solid #C5D9F7;
+  }
+  .hexagon:after {
+    content: "";
+    position: absolute;
+    bottom: -45px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 65px solid transparent;
+    border-right: 65px solid transparent;
+    border-top: 45px solid #C5D9F7;
+  }
+
+  .square {
+    height: 110px;
+    transform: rotate(-10.01deg);
+    position: absolute;
+    width: 112px;
+  }
+
+  .square-1 {
+    background-color: #BED7D1;
+    bottom: 220px;
+    right: 190px;
+  }
+
+  .square-2 {
+    background-color: #F7EBC3;;
+    bottom: 140px;
+    right: 220px;
+    z-index: -2;
+  }
