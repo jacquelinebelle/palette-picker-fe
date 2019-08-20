@@ -1,13 +1,15 @@
 import React from 'react';
 import Background from '../Background';
+import PaletteGenerator from '../PaletteGenerator';
 import './App.scss';
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <header>
-        <h1>palette picker!</h1>
+        <h1 className="main-heading">palette picker</h1>
       </header>
+      <PaletteGenerator />
       <Background />
     </div>
   );
