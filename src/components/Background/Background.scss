@@ -1,0 +1,58 @@
+
+.background {
+    background-color: #FAFAFA;
+    overflow: hidden;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: -1;
+    
+}
+
+.ellipse {
+    background: #F8E1E7;
+    border-radius: 50%;
+    bottom: -100px;
+    height: 470px;
+    left: 55px;
+    position: absolute;
+    width: 482px;
+}
+
+.triangle {
+    fill: #FBD6C6;
+    height: 330px;
+    position: absolute;
+    right: 245px;
+    top: -10px;
+    transform: rotate(-69.71deg);
+    width: 390px;
+}
+
+.hexagon {
+    width: 300px;
+    height: 200px;
+    fill: #C5D9F7;
+    position: absolute;
+    top: 90px;
+    left: 100px;
+  }
+
+  .square {
+    height: 110px;
+    transform: rotate(-10.01deg);
+    position: absolute;
+    width: 112px;
+  }
+
+  .square-1 {
+    background-color: #BED7D1;
+    bottom: 220px;
+    right: 190px;
+  }
+
+  .square-2 {
+    background-color: #F7EBC3;;
+    bottom: 140px;
+    right: 220px;
+    z-index: -2;
+  }
