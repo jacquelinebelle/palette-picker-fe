@@ -9,7 +9,7 @@ const Background = ({ color_1, color_2, color_3, color_4, color_5 }) => {
                 className="ellipse" 
                 style={{background: color_4}} />
             <svg 
-                class="triangle"
+                className="triangle"
                 style={{fill: color_2}}>
                 <polygon points="250,60 100,400 400,400" />
             </svg>
