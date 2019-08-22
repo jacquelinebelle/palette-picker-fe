@@ -1,15 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.scss';
-import App from './components/App/App';
+import React from 'react'
+import rootReducer from '../src/reducers'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension';
 import { BrowserRouter } from 'react-router-dom'
-import * as serviceWorker from './serviceWorker';
+import App from './components/App/App'
+import './index.scss';
+export const store = createStore(rootReducer, composeWithDevTools());
 
-ReactDOM.render(
-    <BrowserRouter>
-        <App />
-    </BrowserRouter>,
-    document.getElementById('root')
-);
-
-serviceWorker.unregister();
+render(
+    <Provider store={ store } >
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>,
+  document.getElementById('root')
+)
