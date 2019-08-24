@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import Background from '../../components/Background';
-import PaletteGenerator from '../PaletteGenerator';
+// import PaletteGenerator from '../PaletteGenerator';
+import { setProjects } from '../../actions';
+import { getProjects } from '../../api/apiCalls';
 import ProjectForm from '../ProjectForm';
+import Projects from '../Projects/Projects';
 import { connect } from 'react-redux';
 import './App.scss';
 
 class App extends Component {
+
+  componentDidMount() {
+      this.props.handleSetProjects()
+  }
   
   render() {
     const { colors } = this.props;
@@ -14,7 +21,7 @@ class App extends Component {
         <header>
           <h1>Palette Picker</h1>
         </header>
-        <PaletteGenerator />
+        {/* <PaletteGenerator /> */}
         <ProjectForm />
         <Background 
           color_1={colors[0]}
@@ -22,6 +29,7 @@ class App extends Component {
           color_3={colors[2]}
           color_4={colors[3]}
           color_5={colors[4]} />
+        <Projects />
       </div>
     );
   }
@@ -31,4 +39,8 @@ export const mapStateToProps = (state) => ({
   colors: state.colors
 });
 
-export default connect(mapStateToProps)(App);
+export const mapDispatchToProps = dispatch => ({
+  handleSetProjects: () => getProjects().then(data => dispatch(setProjects(data.projects)))
+}) 
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

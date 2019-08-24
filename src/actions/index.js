@@ -3,13 +3,18 @@ export const setGeneratedColors = (colors) => ({
     colors
 });
 
-export const addProject = (name) => ({
-    type: 'ADD_PROJECT',
-    name
-});
+export const setProjects = projects => ({
+    type: 'SET_PROJECTS',
+    projects
+}) 
 
-export const savePalette = (project_id, palette_id) => ({
-    type: 'SAVE_PALETTE',
-    project_id, 
-    palette_id
-});
+// export const addProject = (name) => ({
+//     type: 'ADD_PROJECT',
+//     name
+// });
+
+// export const savePalette = (project_id, palette_id) => ({
+//     type: 'SAVE_PALETTE',
+//     project_id, 
+//     palette_id
+// });

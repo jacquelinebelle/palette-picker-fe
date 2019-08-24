@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { addProject } from '../../api/apiCalls';
 import './ProjectForm.scss';
 
