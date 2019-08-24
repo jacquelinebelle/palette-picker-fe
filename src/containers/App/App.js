@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Background from '../Background';
+import Background from '../../components/Background';
 import PaletteGenerator from '../PaletteGenerator';
+import ProjectForm from '../ProjectForm';
 import { connect } from 'react-redux';
 import './App.scss';
 
@@ -14,6 +15,7 @@ class App extends Component {
           <h1>Palette Picker</h1>
         </header>
         <PaletteGenerator />
+        <ProjectForm />
         <Background 
           color_1={colors[0]}
           color_2={colors[1]}

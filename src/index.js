@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { BrowserRouter } from 'react-router-dom'
-import App from './components/App/App'
+import App from './containers/App/App'
 import './index.scss';
 export const store = createStore(rootReducer, composeWithDevTools());
 
