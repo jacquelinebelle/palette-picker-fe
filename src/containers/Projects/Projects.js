@@ -1,27 +1,27 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import './Projects.css';
 
 class Projects extends Component {
 
   generateProjects = () => {
     const { projects } = this.props;
-    const project = projects.map(project => {
+    return projects.map(project => {
       return (
-        <h4>{project.name}</h4>
+        <div key={project.id} className="project-container">
+          <h4 className="project-name">{project.name}</h4>
+        </div>
       )
     })
-    return project
   }
   render() {
-    const { projects } = this.props;
-let project = projects.map(project => {
-  return (
-    <h4>{project.name}</h4>
-  )
-})
+
     return (
-      <div>
-        {this.generateProjects}
+      <div className="projects-body">
+        <div className="projects-container">
+          <h3 className="project-title">Projects</h3>
+        {this.generateProjects()}
+        </div>
       </div>
     )
   }

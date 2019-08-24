@@ -22,7 +22,7 @@ class App extends Component {
           <h1>Palette Picker</h1>
         </header>
         {/* <PaletteGenerator /> */}
-        <ProjectForm />
+        {/* <ProjectForm /> */}
         <Background 
           color_1={colors[0]}
           color_2={colors[1]}

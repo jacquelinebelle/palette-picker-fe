@@ -1,0 +1,50 @@
+.projects-body {
+  width: 200px;
+  height: calc(100vh - 100px);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.projects-container {
+  background: rgba(95, 73, 73, 0.192);
+  height: 95%;
+  width: 90%;
+}
+
+.project-container {
+  background: rgba(54, 41, 41, 0.705);
+  margin-bottom: 1px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.project-container:hover {
+  background: rgba(255, 255, 255, 0.664);
+}
+
+.project-container:hover .project-name {
+color: #000
+}
+
+.project-title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+  font-size: 14px;
+  color: #385894;
+  text-align: center;
+}
+
+.project-name {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+  font-size: 12px;
+  padding-left: 5px;
+  color: #fff;
+}
+
