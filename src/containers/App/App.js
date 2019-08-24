@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Background from '../../components/Background';
-// import PaletteGenerator from '../PaletteGenerator';
+import PaletteGenerator from '../PaletteGenerator/PaletteGenerator';
 import { setProjects } from '../../actions';
 import { getProjects } from '../../api/apiCalls';
 import Projects from '../Projects/Projects';
@@ -12,6 +12,10 @@ class App extends Component {
   componentDidMount() {
       this.props.handleSetProjects()
   }
+
+  getUpdatedProject = () => {
+    this.props.handleSetProjects()
+  }
   
   render() {
     const { colors } = this.props;
@@ -20,14 +24,14 @@ class App extends Component {
         <header>
           <h1>Palette Picker</h1>
         </header>
-        {/* <PaletteGenerator /> */}
+        <PaletteGenerator />
+        <Projects getUpdatedProject={this.getUpdatedProject}/>
         <Background 
           color_1={colors[0]}
           color_2={colors[1]}
           color_3={colors[2]}
           color_4={colors[3]}
           color_5={colors[4]} />
-        <Projects />
       </div>
     );
   }

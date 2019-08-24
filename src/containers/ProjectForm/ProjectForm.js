@@ -16,8 +16,15 @@ class ProjectForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const name = `name=${this.state.name}`;
-        addProject(name);
+        const name = this.state.name;
+        addProject(name).then(() => 
+            this.props.getUpdatedProject()
+        )
+        this.clearInput()
+    }
+
+    clearInput = () => {
+        this.setState({name: ""})
     }
 
     render() {
@@ -29,6 +36,7 @@ class ProjectForm extends Component {
                     name="name"
                     placeholder="Add new project"
                     maxLength="20"
+                    value={this.state.name}
                     onChange={this.handleChange} />
                 <button className="submit-project" onClick={this.handleSubmit}>&#43;</button>
             </form>

@@ -16,6 +16,10 @@ class PaletteGenerator extends Component {
         }
     }
 
+    componentDidMount() {
+        this.generatePalette();
+    }
+
     generatePalette = () => {
         var hue = Math.floor(Math.random() * 361);
         var scheme = new ColorScheme();
