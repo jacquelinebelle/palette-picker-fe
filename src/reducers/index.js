@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import { colorsReducer } from './colorsReducer';
-import { projectReducer } from './projectReducer';
+import { projectsReducer } from './projectsReducer';
 
 
 const rootReducer = combineReducers({
     colors: colorsReducer,
-    projects: projectReducer
+    projects: projectsReducer
 })
 
 export default rootReducer

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { addProject } from '../../api/apiCalls';
 import './ProjectForm.scss';
 
@@ -17,8 +16,15 @@ class ProjectForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const name = `name=${this.state.name}`;
-        addProject(name);
+        const name = this.state.name;
+        addProject(name).then(() => 
+            this.props.getUpdatedProject()
+        )
+        this.clearInput()
+    }
+
+    clearInput = () => {
+        this.setState({name: ""})
     }
 
     render() {
@@ -28,9 +34,11 @@ class ProjectForm extends Component {
                     className="project-name-input"
                     type="text"
                     name="name"
-                    placeholder="enter project name"
+                    placeholder="Add new project"
+                    maxLength="20"
+                    value={this.state.name}
                     onChange={this.handleChange} />
-                <button className="submit-project" onClick={this.handleSubmit}>make project</button>
+                <button className="submit-project" onClick={this.handleSubmit}>&#43;</button>
             </form>
         )
     }

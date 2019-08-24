@@ -1,11 +1,19 @@
 @font-face { font-family: Swash; src: url('../../assets/header-font.otf'); } 
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 header {
     text-align: center;
     h1 {
-        color: #C4C4C4;
+        color: rgb(56, 88, 148);
         font-family: Swash;
         font-size: 58px;
         letter-spacing: 7px;
+        padding-top: 10px;
+
     }
 }
+
