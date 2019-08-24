@@ -3,7 +3,6 @@ import Background from '../../components/Background';
 // import PaletteGenerator from '../PaletteGenerator';
 import { setProjects } from '../../actions';
 import { getProjects } from '../../api/apiCalls';
-import ProjectForm from '../ProjectForm';
 import Projects from '../Projects/Projects';
 import { connect } from 'react-redux';
 import './App.scss';
@@ -22,7 +21,6 @@ class App extends Component {
           <h1>Palette Picker</h1>
         </header>
         {/* <PaletteGenerator /> */}
-        {/* <ProjectForm /> */}
         <Background 
           color_1={colors[0]}
           color_2={colors[1]}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import './Projects.css';
+import ProjectForm from '../ProjectForm/ProjectForm';
 
 class Projects extends Component {
 
@@ -21,6 +22,7 @@ class Projects extends Component {
         <div className="projects-container">
           <h3 className="project-title">Projects</h3>
         {this.generateProjects()}
+        <ProjectForm /> 
         </div>
       </div>
     )

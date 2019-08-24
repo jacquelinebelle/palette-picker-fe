@@ -27,9 +27,10 @@ class ProjectForm extends Component {
                     className="project-name-input"
                     type="text"
                     name="name"
-                    placeholder="enter project name"
+                    placeholder="Add new project"
+                    maxLength="20"
                     onChange={this.handleChange} />
-                <button className="submit-project" onClick={this.handleSubmit}>make project</button>
+                <button className="submit-project" onClick={this.handleSubmit}>&#43;</button>
             </form>
         )
     }

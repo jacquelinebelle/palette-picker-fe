@@ -1,5 +1,10 @@
 @font-face { font-family: Swash; src: url('../../assets/header-font.otf'); } 
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 header {
     text-align: center;
     h1 {

@@ -1,5 +1,5 @@
 .projects-body {
-  width: 200px;
+  width: 250px;
   height: calc(100vh - 100px);
   position: absolute;
   bottom: 0;
@@ -13,6 +13,7 @@
   background: rgba(95, 73, 73, 0.192);
   height: 95%;
   width: 90%;
+  position: relative;
 }
 
 .project-container {
@@ -38,6 +39,8 @@ color: #000
   font-size: 14px;
   color: #385894;
   text-align: center;
+  height: 32px;
+  padding-top: 5px;
 }
 
 .project-name {
