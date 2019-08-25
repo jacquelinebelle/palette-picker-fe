@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { App , mapDispatchToProps, mapStateToProps} from './App';
 import { setProjects, projectSelected, setPalettes } from '../../actions';
-import { getProjects } from '../../api/apiCalls';
+import { fetchProjects } from '../../api/apiCalls';
 
 
 describe('App', () => {
@@ -65,7 +65,7 @@ describe('App', () => {
 
   it('should dispatch with a setProject action when handleSetProjects is called', async () => {
     const mockDispatch = jest.fn()
-    const mockAction = setProjects(await getProjects())
+    const mockAction = setProjects(await fetchProjects())
     const mappedProps = mapDispatchToProps(mockDispatch)
     await mappedProps.handleSetProjects()
     expect(mockDispatch).toHaveBeenCalledWith(mockAction) 

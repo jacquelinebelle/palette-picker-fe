@@ -1,9 +1,9 @@
-import { getProjects } from '../api/apiCalls';
+import { fetchProjects } from '../api/apiCalls';
 
 
 describe('apiCalls', () => {
 
-  describe('getProjects', () => {
+  describe('fetchProjects', () => {
     let mockProject
     beforeEach( () => {
   
@@ -17,19 +17,19 @@ describe('apiCalls', () => {
       })
     });
   
-    it('getProjects should return a parsed response if status is ok', async () =>{
-      const result = await getProjects();
-      getProjects()
+    it('fetchProjects should return a parsed response if status is ok', async () =>{
+      const result = await fetchProjects();
+      fetchProjects()
       expect(result).toEqual(mockProject.projects)
     })
   
-    it('getProjects should return error if status is not ok', async () => {
+    it('fetchProjects should return error if status is not ok', async () => {
       window.fetch = jest.fn().mockImplementationOnce(() => {
         return Promise.resolve( {
           ok: false,
         })
       })
-      await expect(getProjects()).rejects.toEqual(Error('Cannot fetch projects'))
+      await expect(fetchProjects()).rejects.toEqual(Error('Cannot fetch projects'))
     })
   
     })

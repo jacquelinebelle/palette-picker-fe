@@ -1,4 +1,4 @@
-export const getProjects = () => {
+export const fetchProjects = () => {
   return  fetch('http://localhost:3001/api/v1/projects')
         .then(res => {
           if (res.ok) {

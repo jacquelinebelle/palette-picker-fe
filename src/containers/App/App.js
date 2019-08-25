@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Background from '../../components/Background';
 import PaletteGenerator from '../PaletteGenerator/PaletteGenerator';
 import { setProjects } from '../../actions';
-import { getProjects, fetchAddPalette, fetchPalettes } from '../../api/apiCalls';
+import { fetchProjects, fetchAddPalette, fetchPalettes } from '../../api/apiCalls';
 import Projects from '../Projects/Projects';
 import Palettes from '../Palettes/Palettes';
 import { connect } from 'react-redux';
@@ -79,7 +79,7 @@ export const mapStateToProps = (state) => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  handleSetProjects: async () => dispatch(setProjects( await getProjects())),
+  handleSetProjects: async () => dispatch(setProjects( await fetchProjects())),
   handleProjectSelected: selected => dispatch(projectSelected(selected)),
   handleSetPalettes: palettes => dispatch(setPalettes(palettes))
 }) 
