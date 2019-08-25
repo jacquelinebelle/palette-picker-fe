@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import './Projects.css';
 import ProjectForm from '../ProjectForm/ProjectForm';
-import { deleteProject } from '../../api/apiCalls';
+import { fetchDeleteProject } from '../../api/apiCalls';
 
 class Projects extends Component {
 
@@ -18,7 +18,7 @@ class Projects extends Component {
 
   handleDeleteProject = e => {
     const id = parseInt(e.target.parentElement.id)
-    deleteProject(id).then(() => 
+    fetchDeleteProject(id).then(() => 
       this.props.getUpdatedProject()
     ) 
   }

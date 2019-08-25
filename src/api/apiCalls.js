@@ -9,7 +9,7 @@ export const fetchProjects = () => {
         }).then(data =>  data.projects)
 }
 
-export const addProject = projectName => {
+export const fetchAddProject = projectName => {
     return  fetch('http://localhost:3001/api/v1/projects', {
         method: 'POST',
         headers: {'Content-type' : 'application/json'},
@@ -18,7 +18,7 @@ export const addProject = projectName => {
     .then(res => res.json())
   }
 
-  export const deleteProject = id => {
+  export const fetchDeleteProject = id => {
     return  fetch(`http://localhost:3001/api/v1/projects/${id}`, {
         method: 'DELETE'
     })
