@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import Background from '../../components/Background';
 import PaletteGenerator from '../PaletteGenerator/PaletteGenerator';
 import { setProjects } from '../../actions';
-import { getProjects, addPalette, fetchPalettes } from '../../api/apiCalls';
+import { getProjects, fetchAddPalette, fetchPalettes } from '../../api/apiCalls';
 import Projects from '../Projects/Projects';
 import Palettes from '../Palettes/Palettes';
 import { connect } from 'react-redux';
 import './App.scss';
 import {projectSelected, setPalettes } from '../../actions';
 
-class App extends Component {
+export class App extends Component {
 
   componentDidMount() {
       this.props.handleSetProjects()
@@ -29,7 +29,7 @@ class App extends Component {
       color_4: colors[3],
       color_5: colors[4],
     }
-    addPalette(selectedProject, newPalette).then(() =>
+    fetchAddPalette(selectedProject, newPalette).then(() =>
       this.getPalettes(selectedProject)
     )
   }
@@ -37,6 +37,10 @@ class App extends Component {
   getPalettes = id => {
     this.setState({currentProject: id})
     this.props.handleProjectSelected(id)
+    this.handleFetchPalettes(id)
+  }
+
+  handleFetchPalettes = (id) => {
     fetchPalettes(id).then(data => {
       if (data[0].error === 'Cannot find palettes under this project') {
         this.setState({hasPalettes: false})
@@ -75,10 +79,9 @@ export const mapStateToProps = (state) => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  handleSetProjects: () => getProjects().then(data => dispatch(setProjects(data.projects))),
+  handleSetProjects: async () => dispatch(setProjects( await getProjects())),
   handleProjectSelected: selected => dispatch(projectSelected(selected)),
   handleSetPalettes: palettes => dispatch(setPalettes(palettes))
-
 }) 
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -26,9 +26,8 @@ class Projects extends Component {
 
 
   generateProjects = () => {
-    const { projects } = this.props;
+    const  {projects}  = this.props;
     const { currentProject } = this.state;
-
     return projects.map(project => {
       const selectedstyle = (project.id === currentProject) ? {background: '#385894'} : null
 
