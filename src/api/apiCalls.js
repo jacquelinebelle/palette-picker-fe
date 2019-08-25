@@ -23,7 +23,7 @@ export const addProject = projectName => {
   }
 
 
-  export const getPalettes = id => {
+  export const fetchPalettes = id => {
     return  fetch(`http://localhost:3001/api/v1/projects/${id}/palettes`)
           .then(res =>
              res.json()
@@ -31,4 +31,13 @@ export const addProject = projectName => {
           .catch(error => {
               throw new Error(error.message)
           })
+  }
+
+  export const addPalette = (id, newPalette) => {
+    return  fetch(`http://localhost:3001/api/v1/projects/${id}`, {
+        method: 'POST',
+        headers: {'Content-type' : 'application/json'},
+        body: JSON.stringify({ ...newPalette })
+    })
+    .then(res => res.json())
   }

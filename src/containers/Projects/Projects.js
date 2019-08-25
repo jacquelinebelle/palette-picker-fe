@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import './Projects.css';
 import ProjectForm from '../ProjectForm/ProjectForm';
-import { deleteProject, getPalettes } from '../../api/apiCalls';
-import { setPalettes } from '../../actions';
+import { deleteProject } from '../../api/apiCalls';
 
 class Projects extends Component {
 
@@ -12,19 +11,9 @@ class Projects extends Component {
     hasPalettes: false
   }
 
-  getPalettes = e => {
+  handleGetPalettes = e => {
     const id = parseInt(e.target.parentElement.id);
-    this.setState({currentProject: id})
-    getPalettes(id).then(data => {
-      if (data[0].error === 'Cannot find palettes under this project') {
-        this.setState({hasPalettes: false})
-        this.props.handleSetPalettes([{error: 'No palettes under this project'}])
-      } else {
-        this.setState({hasPalettes: true})
-        console.log(data)
-        this.props.handleSetPalettes(data)
-      }
-    })
+    this.props.getPalettes(id)
   }
 
   handleDeleteProject = e => {
@@ -34,12 +23,18 @@ class Projects extends Component {
     ) 
   }
 
+
+
   generateProjects = () => {
     const { projects } = this.props;
+    const { currentProject } = this.state;
+
     return projects.map(project => {
+      const selectedstyle = (project.id === currentProject) ? {background: '#385894'} : null
+
       return (
         <div key={project.id} id={project.id} className="project-container">
-          <h4 className="project-name" onClick={this.getPalettes}>{project.name}</h4>
+          <h4 className="project-name" style={selectedstyle} onClick={this.handleGetPalettes}>{project.name}</h4>
           <button onClick={this.handleDeleteProject} className="delete-project-btn">&#xd7;</button>
         </div>
       )
@@ -63,8 +58,6 @@ export const mapStateToProps = state => ({
   projects: state.projects
 })
 
-export const mapDispatchToProps = dispatch => ({
-  handleSetPalettes: palettes => dispatch(setPalettes(palettes))
-})
 
-export default connect(mapStateToProps, mapDispatchToProps)(Projects)
+
+export default connect(mapStateToProps)(Projects)

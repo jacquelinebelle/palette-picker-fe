@@ -1,6 +1,6 @@
 .projects-body {
   width: 250px;
-  height: calc(100vh - 100px);
+  height: 100vh;
   position: absolute;
   bottom: 0;
   left: 0;

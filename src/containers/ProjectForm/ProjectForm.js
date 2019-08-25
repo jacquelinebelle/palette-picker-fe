@@ -35,7 +35,7 @@ class ProjectForm extends Component {
                     type="text"
                     name="name"
                     placeholder="Add new project"
-                    maxLength="20"
+                    maxLength="30"
                     value={this.state.name}
                     onChange={this.handleChange} />
                 <button className="submit-project" onClick={this.handleSubmit}>&#43;</button>

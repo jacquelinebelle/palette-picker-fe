@@ -1,0 +1,60 @@
+.palettes-body {
+  bottom: 0;
+  height: calc(100vh - 120px);
+  position: absolute;
+  right: 0;
+  width: calc(100vw - 250px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.palette-container {
+  display: flex;
+  width: 600px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.13);
+  margin-bottom: 10px;
+}
+
+.pal-color {
+  height: 35px;
+  width: 65px;
+  border-right: 1px solid #fff;
+}
+
+.pal-colors-container {
+  display: flex;
+}
+
+.palette-name {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 7px;
+  font-weight: lighter;
+  padding-top: 9px;
+  font-size: 14px;
+  color: rgb(109, 91, 91);
+  width: 170px;
+}
+
+.add-palette-btn {
+  position: absolute;
+  bottom: 20px;
+  right: 10px;
+  border: none;
+  background: #385894;
+  width: 180px;
+  height: 25px;
+  border-radius: 25px;
+  box-shadow: 0 0 4px 0 rgba(87, 76, 76, 0.507);
+  cursor: pointer;
+  color: #fff;
+  outline: none;
+  border: 1px solid #fff;
+}
+
+.add-palette-btn:hover {
+  box-shadow: 0 0 5px 0 rgba(87, 76, 76, 0.705);
+  border: 1px solid #fff;
+}
