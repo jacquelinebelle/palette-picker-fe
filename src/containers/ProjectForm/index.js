@@ -49,7 +49,7 @@ class ProjectForm extends Component {
                         name="name"
                         onChange={this.handleChange}
                         onKeyUp={this.handleKeyUp}
-                        placeholder="START NEW PROJECT"
+                        placeholder="START PROJECT"
                     />
                     <button className="add-project-btn" onClick={this.handleSubmit}>
                         +
