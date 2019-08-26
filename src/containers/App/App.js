@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import Background from '../../components/Background';
 import PaletteGenerator from '../PaletteGenerator';
 import { setProjects } from '../../actions';
@@ -23,8 +24,10 @@ class App extends Component {
     return (
       <div className="app">
         <Nav />
-        <PaletteGenerator />
-        <Projects getUpdatedProject={this.getUpdatedProject}/>
+        <Switch>
+          <Route exact path='/' render={() => <PaletteGenerator />} />
+          <Route exact path='/projects' render={() => <Projects getUpdatedProject={this.getUpdatedProject} />} />
+        </Switch>
         <Background 
           color_1={colors[0]}
           color_2={colors[1]}
