@@ -27,12 +27,17 @@ class Projects extends Component {
   render() {
 
     return (
-      <div className="projects-body">
+      <main className="projects-body">
         <div className="projects-container">
-          <h3 className="project-title">Projects</h3>
-        {this.generateProjects()}
+          {this.generateProjects()}
         </div>
-      </div>
+          {!this.generateProjects().length && 
+            <div className="projects-container">
+              <h3 className="no-projects">No projects added yet!</h3>
+              <ProjectForm />
+            </div>
+          }
+      </main>
     )
   }
 }
