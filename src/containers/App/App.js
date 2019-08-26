@@ -75,6 +75,7 @@ export class App extends Component {
   }
 }
 
+
 export const mapStateToProps = (state) => ({
   colors: state.colors,
   selectedProject: state.selectedProject
