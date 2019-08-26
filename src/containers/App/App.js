@@ -11,8 +11,10 @@ import './App.scss';
 
 class App extends Component {
 
-  componentDidMount() {
-      // this.props.handleSetProjects()
+  async componentDidMount() {
+    const projects = await getProjects();
+    console.log(projects.projects)
+    this.props.setProjects(projects.projects);
   }
 
   getUpdatedProject = () => {
@@ -44,7 +46,7 @@ export const mapStateToProps = (state) => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  handleSetProjects: () => getProjects().then(data => dispatch(setProjects(data.projects)))
+  setProjects: projects => dispatch(setProjects(projects))
 }) 
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

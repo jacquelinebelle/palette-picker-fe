@@ -13,12 +13,13 @@ class Projects extends Component {
     ) 
   }
 
-  generateProjects = () => {
+  displayProjects = () => {
     const { projects } = this.props;
     return projects.map(project => {
       return (
         <div key={project.id} className="project-container">
           <h4 className="project-name">{project.name}</h4>
+          {!project.palettes && <p className="no-palettes">No palettes saved to this project yet.</p>}
           <button onClick={this.handleDeleteProject} id={project.id} className="delete-project-btn">&#xd7;</button>
         </div>
       )
@@ -29,9 +30,9 @@ class Projects extends Component {
     return (
       <main className="projects-body">
         <div className="projects-container">
-          {this.generateProjects()}
+          {this.displayProjects()}
         </div>
-          {!this.generateProjects().length && 
+          {!this.displayProjects().length && 
             <div className="projects-container">
               <h3 className="no-projects">No projects added yet!</h3>
               <ProjectForm projects={true} />
