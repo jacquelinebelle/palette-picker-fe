@@ -28,7 +28,6 @@ class Projects extends Component {
     
     return projects.map(project => {
       const selectedstyle = (project.id === selectedProject) ? {background: '#385894'} : null;
-      console.log(selectedProject)
       return (
         <div key={project.id} id={project.id} className="project-container">
           <h4 className="project-name" style={selectedstyle} onClick={this.handleGetPalettes}>{project.name}</h4>

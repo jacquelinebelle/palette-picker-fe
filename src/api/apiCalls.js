@@ -15,28 +15,39 @@ export const fetchAddProject = projectName => {
         headers: {'Content-type' : 'application/json'},
         body: JSON.stringify({name: projectName})
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+       return res.json()
+      } else {
+        throw new Error('Cannot add project')
+      }
+    }).then(data =>  data.project)
   }
 
-
-  
 
   export const fetchDeleteProject = id => {
     return  fetch(`http://localhost:3001/api/v1/projects/${id}`, {
         method: 'DELETE'
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+       return res.json()
+      } else {
+        throw new Error('Cannot delete project')
+      }
+    }).then(data =>  data.project)
   }
 
 
   export const fetchPalettes = id => {
     return  fetch(`http://localhost:3001/api/v1/projects/${id}/palettes`)
-          .then(res =>
-             res.json()
-          )
-          .catch(error => {
-              throw new Error(error.message)
-          })
+              .then(res => {
+                if (res.ok) {
+                return res.json()
+                } else {
+                  return {palettes: 'Cannot fetch palettes'}
+                }
+              }).then(data =>  (data.palettes))
   }
 
   export const fetchAddPalette = (id, newPalette) => {
@@ -45,5 +56,11 @@ export const fetchAddProject = projectName => {
         headers: {'Content-type' : 'application/json'},
         body: JSON.stringify({ ...newPalette })
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+       return res.json()
+      } else {
+        throw new Error('Cannot add palette')
+      }
+    }).then(data =>  data.palette)
   }
