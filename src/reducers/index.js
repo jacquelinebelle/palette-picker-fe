@@ -5,7 +5,6 @@ import { palettesReducer } from './palettesReducer';
 import { projectSelectedReducer } from './projectSelectedReducer';
 import { openPaletteGeneratorReducer } from './openPaletteGeneratorReducer';
 
-
 const rootReducer = combineReducers({
     colors: colorsReducer,
     projects: projectsReducer,

@@ -7,7 +7,6 @@ import { fetchDeleteProject } from '../../api/apiCalls';
 class Projects extends Component {
 
   state = {
-    currentProject: 0,
     hasPalettes: false
   }
 
@@ -24,13 +23,12 @@ class Projects extends Component {
   }
 
 
-
   generateProjects = () => {
-    const  {projects}  = this.props;
-    const { currentProject } = this.state;
+    const  {projects, selectedProject}  = this.props;
+    
     return projects.map(project => {
-      const selectedstyle = (project.id === currentProject) ? {background: '#385894'} : null
-
+      const selectedstyle = (project.id === selectedProject) ? {background: '#385894'} : null;
+      console.log(selectedProject)
       return (
         <div key={project.id} id={project.id} className="project-container">
           <h4 className="project-name" style={selectedstyle} onClick={this.handleGetPalettes}>{project.name}</h4>
@@ -54,9 +52,10 @@ class Projects extends Component {
 }
 
 export const mapStateToProps = state => ({
-  projects: state.projects
+  projects: state.projects,
+  selectedProject: state.selectedProject
 })
 
 
 
-export default connect(mapStateToProps)(Projects)
+export default connect(mapStateToProps, null)(Projects)

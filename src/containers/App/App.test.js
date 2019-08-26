@@ -56,13 +56,6 @@ describe('App', () => {
   // })
 
 
-
-
-
-
-
-
-
   it('should dispatch with a setProject action when handleSetProjects is called', async () => {
     const mockDispatch = jest.fn()
     const mockAction = setProjects(await fetchProjects())

@@ -18,6 +18,9 @@ export const fetchAddProject = projectName => {
     .then(res => res.json())
   }
 
+
+  
+
   export const fetchDeleteProject = id => {
     return  fetch(`http://localhost:3001/api/v1/projects/${id}`, {
         method: 'DELETE'
