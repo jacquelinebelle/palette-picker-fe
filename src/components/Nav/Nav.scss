@@ -1,0 +1,18 @@
+.nav-bar {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    h1 {
+        color: #626262;
+        font-family: Swash;
+        font-size: 58px;
+        letter-spacing: 7px;
+        padding-top: 10px;
+
+    }
+}
+
+.link {
+    color: #626262;
+    text-decoration: none;
+}

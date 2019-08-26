@@ -1,19 +1,9 @@
 @font-face { font-family: Swash; src: url('../../assets/header-font.otf'); } 
 
 * {
+    font-family: 'Source Sans Pro';
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-header {
-    text-align: center;
-    h1 {
-        color: #626262;
-        font-family: Swash;
-        font-size: 58px;
-        letter-spacing: 7px;
-        padding-top: 10px;
-
-    }
 }
 

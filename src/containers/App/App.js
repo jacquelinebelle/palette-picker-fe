@@ -4,6 +4,7 @@ import PaletteGenerator from '../PaletteGenerator';
 import { setProjects } from '../../actions';
 import { getProjects } from '../../api/apiCalls';
 import Projects from '../Projects';
+import Nav from '../../components/Nav';
 import { connect } from 'react-redux';
 import './App.scss';
 
@@ -21,9 +22,7 @@ class App extends Component {
     const { colors } = this.props;
     return (
       <div className="app">
-        <header>
-          <h1>Palette Picker</h1>
-        </header>
+        <Nav />
         <PaletteGenerator />
         <Projects getUpdatedProject={this.getUpdatedProject}/>
         <Background 
