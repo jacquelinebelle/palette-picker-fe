@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './containers/App/App';
 import 'normalize.css';
 import './index.scss';
+
 export const store = createStore(rootReducer, composeWithDevTools());
 
 render(

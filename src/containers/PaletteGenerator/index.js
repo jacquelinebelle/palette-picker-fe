@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { setGeneratedColors } from '../../actions';
 import ProjectForm from '../ProjectForm';
+import { setGeneratedColors, openPaletteGenerator } from '../../actions';
 import './PaletteGenerator.scss';
 import generate from '../../assets/generate.svg'
 var ColorScheme = require('color-scheme');
 
-class PaletteGenerator extends Component {
+export class PaletteGenerator extends Component {
     constructor() {
         super();
         this.state = {
@@ -15,6 +15,7 @@ class PaletteGenerator extends Component {
             color_3: '',
             color_4: '',
             color_5: '',
+            paletteName: ''
         }
     }
 
@@ -33,10 +34,31 @@ class PaletteGenerator extends Component {
         var palette = colors.map(color => '#' + color).slice(10, 15);
 
         this.setState({ color_1: palette[0], color_2: palette[1], color_3: palette[2], color_4: palette[3], color_5: palette[4] });
-        this.props.setGeneratedColors(palette);
+        this.props.handleSetGeneratedColors(palette);
+    }
+
+    togglePaletteGenerator = () => {
+        this.props.handleOpenPaletteGenerator()
+      }
+
+    handleOnChange = e => {
+        this.setState({paletteName: e.target.value});
+        
+    }
+
+    submitNewPalette = () => {
+        const { paletteName } = this.state
+        this.props.addPalette(paletteName)
+        this.props.handleOpenPaletteGenerator()
+        this.clearInput()
+    }
+
+    clearInput = () => {
+        this.setState({paletteName: ""})
     }
 
     render() {
+        const palleteGenstyle = this.props.openPaletteGen ? {display: 'flex'} : {display: 'none'}
         return (
             <article className="container">
                 <section className="color color-1" style={{background: this.state.color_1}} />
@@ -54,12 +76,13 @@ class PaletteGenerator extends Component {
     }
 }
 
-export const mapStateToProps = (state) => ({
-
+export const mapStateToProps = state => ({
+    openPaletteGen: state.openPaletteGen
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-    setGeneratedColors: (colors) => dispatch(setGeneratedColors(colors))
+    handleSetGeneratedColors: (colors) => dispatch(setGeneratedColors(colors)),
+    handleOpenPaletteGenerator: () => dispatch(openPaletteGenerator())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaletteGenerator);

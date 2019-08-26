@@ -1,14 +1,23 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import './Projects.css';
-import ProjectForm from '../ProjectForm';
-import { deleteProject } from '../../api/apiCalls';
+import ProjectForm from '../ProjectForm/ProjectForm';
+import { fetchDeleteProject } from '../../api/apiCalls';
 
-class Projects extends Component {
+export class Projects extends Component {
+
+  state = {
+    hasPalettes: false
+  }
+
+  handleGetPalettes = e => {
+    const id = parseInt(e.target.parentElement.id);
+    this.props.getPalettes(id)
+  }
 
   handleDeleteProject = e => {
-    const id = parseInt(e.target.id)
-    deleteProject(id).then(() => 
+    const id = parseInt(e.target.parentElement.id)
+    fetchDeleteProject(id).then(() => 
       this.props.getUpdatedProject()
     ) 
   }
@@ -16,6 +25,7 @@ class Projects extends Component {
   displayProjects = () => {
     const { projects } = this.props;
     return projects.map(project => {
+      const selectedstyle = (project.id === selectedProject) ? {background: '#385894'} : null;
       return (
         <div key={project.id} className="project-container">
           <h4 className="project-name">{project.name}</h4>
@@ -44,7 +54,10 @@ class Projects extends Component {
 }
 
 export const mapStateToProps = state => ({
-  projects: state.projects
+  projects: state.projects,
+  selectedProject: state.selectedProject
 })
 
-export default connect(mapStateToProps)(Projects)
+
+
+export default connect(mapStateToProps, null)(Projects)

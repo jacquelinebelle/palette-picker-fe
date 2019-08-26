@@ -1,66 +1,80 @@
-export const getProjects = () => {
+export const fetchProjects = () => {
   return  fetch('http://localhost:3001/api/v1/projects')
-        .then(res =>{
-            if(res.ok) {
-                return res.json()
-            } else {
-                return "Error fetching projects"
-            }
-        })
-        .catch(error => {
-            throw new Error(error.message)
-        })
+        .then(res => {
+          if (res.ok) {
+           return res.json()
+          } else {
+            throw new Error('Cannot fetch projects')
+          }
+        }).then(data =>  data.projects)
 }
 
-export const addProject = projectName => {
+export const fetchAddProject = projectName => {
     return  fetch('http://localhost:3001/api/v1/projects', {
         method: 'POST',
         headers: {'Content-type' : 'application/json'},
         body: JSON.stringify({name: projectName})
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+       return res.json()
+      } else {
+        throw new Error('Cannot add project')
+      }
+    }).then(data =>  data.project)
   }
 
-  export const deleteProject = id => {
-      console.log('fetching...')
+
+  export const fetchDeleteProject = id => {
     return  fetch(`http://localhost:3001/api/v1/projects/${id}`, {
         method: 'DELETE'
     })
-    .then(res => res.json())
+    .then(res => {
+      if (res.ok) {
+       return res.json()
+      } else {
+        throw new Error('Cannot delete project')
+      }
+    }).then(data =>  data.project)
   }
 
-// export const getProjects = async () => {
-//     try {
-//         const response = await fetch('http://localhost:3001/api/v1/projects');
-//         if (!response.ok) {
-//             throw new Error('Error fetching projects');
-//         }
-//         const projects = await response.json();
-//         return projects;
-//     } catch (error) {
-//         throw new Error(error.message);
-//     }
-// }
 
-// export const addProject = async (name) => {
-//     try {
-//         console.log(name)
-//         const response = await fetch('http://localhost:3001/api/v1/projects', {
-//             method: 'POST',
-//             body: name,
-//             headers: {
-//                 'Content-Type': 'application/x-www-form-urlencoded',
-//                 'Origin': 'http://localhost:3001/',
-//                 'Access-Control-Allow-Origin': 'http://localhost:3000/'
-//             }
-//         });
-//         if (!response.ok) {
-//             throw new Error('Error posting new project');
-//         }
-//         console.log(response);
-//         const project = await response.json();
-//         return project;
-//     } catch (error) {
-//         throw new Error(error.message);
-//     }
-// }
+  export const fetchPalettes = id => {
+    return  fetch(`http://localhost:3001/api/v1/projects/${id}/palettes`)
+              .then(res => {
+                if (res.ok) {
+                return res.json()
+                } else {
+                  return {palettes: 'Cannot fetch palettes'}
+                }
+              }).then(data =>  (data.palettes))
+  }
+
+  export const fetchAddPalette = (id, newPalette) => {
+    return  fetch(`http://localhost:3001/api/v1/projects/${id}`, {
+        method: 'POST',
+        headers: {'Content-type' : 'application/json'},
+        body: JSON.stringify({ ...newPalette })
+    })
+    .then(res => {
+      if (res.ok) {
+       return res.json()
+      } else {
+        throw new Error('Cannot add palette')
+      }
+    }).then(data =>  data.palette)
+  }
+
+  export const fetchDeletePalette = id => {
+    return  fetch(`http://localhost:3001/api/v1/projects/palettes/${id}`, {
+        method: 'DELETE'
+    })
+    .then(res => {
+      if (res.ok) {
+       return res.json()
+      } else {
+        throw new Error('Cannot delete palette')
+      }
+      
+    }).then(data =>  data.palette)
+  }

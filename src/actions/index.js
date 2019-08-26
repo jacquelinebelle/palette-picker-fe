@@ -8,13 +8,16 @@ export const setProjects = projects => ({
     projects
 }) 
 
-// export const addProject = (name) => ({
-//     type: 'ADD_PROJECT',
-//     name
-// });
+export const setPalettes = palettes => ({
+    type: 'SET_PALETTES',
+    palettes
+})
 
-// export const savePalette = (project_id, palette_id) => ({
-//     type: 'SAVE_PALETTE',
-//     project_id, 
-//     palette_id
-// });
+export const projectSelected = selected => ({
+    type: 'PROJECT_SELECTED',
+    selected
+})
+
+export const openPaletteGenerator = () => ({
+    type: 'OPEN_PALETTE_GENERATOR',
+})

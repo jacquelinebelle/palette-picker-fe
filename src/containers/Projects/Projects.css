@@ -10,6 +10,8 @@
   grid-area: 1 / 2 / 2 / 3;
   padding: 25px;
   position: relative;
+  border-radius: 10px;
+
 }
 
 .project-container {
