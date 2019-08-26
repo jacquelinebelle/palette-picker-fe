@@ -2,11 +2,19 @@ import React, { Component } from 'react';
 import './Palettes.css';
 import { connect } from 'react-redux';
 import { openPaletteGenerator } from '../../actions';
+import { fetchDeletePalette } from '../../api/apiCalls';
 
 export class Palettes extends Component {
 
   togglePaletteGenerator = () => {
     this.props.handleOpenPaletteGenerator()
+  }
+
+  handleDeletePalette = e => {
+    const id = parseInt(e.target.parentElement.id)
+    fetchDeletePalette(id).then(() =>
+      this.props.getPalettes(id)
+    )
   }
 
   generatePalettes = () => {
@@ -26,6 +34,7 @@ export class Palettes extends Component {
                 <section className="pal-color pal-color-4" style={{background: palette.color_4}}/>
                 <section className="pal-color pal-color-5" style={{background: palette.color_5}}/>
             </section>
+            <button onClick={this.handleDeletePalette}>&#xd7;</button>
             </div>
           )
         })

@@ -62,7 +62,7 @@ export class App extends Component {
           <h1>Palette Picker</h1>
         </header>
         <PaletteGenerator addPalette={this.addPalette}/>
-        <Palettes  />
+        <Palettes getPalettes={this.getPalettes} />
         <Projects getUpdatedProject={this.getUpdatedProject} getPalettes={this.getPalettes}/>
         <Background 
           color_1={colors[0]}

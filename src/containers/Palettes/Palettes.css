@@ -11,6 +11,7 @@
 
 .palette-container {
   display: flex;
+  justify-content: space-between;
   width: 600px;
   border-radius: 8px;
   background: #fff;

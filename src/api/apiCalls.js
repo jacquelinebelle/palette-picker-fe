@@ -64,3 +64,16 @@ export const fetchAddProject = projectName => {
       }
     }).then(data =>  data.palette)
   }
+
+  export const fetchDeletePalette = id => {
+    return  fetch(`http://localhost:3001/api/v1/projects/palettes/${id}`, {
+        method: 'DELETE'
+    })
+    .then(res => {
+      if (res.ok) {
+       return res.json()
+      } else {
+        throw new Error('Cannot delete palette')
+      }
+    }).then(data =>  data.project)
+  }
