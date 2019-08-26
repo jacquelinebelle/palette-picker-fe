@@ -75,5 +75,6 @@ export const fetchAddProject = projectName => {
       } else {
         throw new Error('Cannot delete palette')
       }
+      
     }).then(data =>  data.palette)
   }
