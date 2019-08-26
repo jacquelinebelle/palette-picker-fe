@@ -41,34 +41,34 @@ class ProjectForm extends Component {
 
     render() {
         return (
-            <form className="project-form">
-                <div className="add-project">
+            <form className={this.props.projects ? `project-page-form` : `project-form`}>
+                <div className={this.props.projects ? `project-page-add` : `add-project`}>
                     <input 
-                        className="project-input"
+                        className={`project-input`}
                         type="text"
                         name="name"
                         onChange={this.handleChange}
                         onKeyUp={this.handleKeyUp}
                         placeholder="START PROJECT"
                     />
-                    <button className="add-project-btn" onClick={this.handleSubmit}>
+                    <button className={`add-project-btn`} onClick={this.handleSubmit}>
                         +
                     </button>
                 </div>
-                <div className="save-palette">
-                    {/* <select className="project-dropdown">
-                        <option value="">PROJECT</option>
+                <div className={this.props.projects ? `project-page-save` : `save-palette`}>
+                    {/* <select className={project-dropdown}>
+                        <option value=""">PROJECT</option>
                         <option value="example">project example</option>
                     </select> */}
                     <input 
-                        className="palette-input"
+                        className={`palette-input`}
                         type="text"
                         name="name"
                         onChange={this.handleChange}
                         onKeyUp={this.handleKeyUp}
                         placeholder="PALETTE NAME"
                     />
-                    <button className="save-palette-btn" onClick={this.handleSubmit}>
+                    <button className={`save-palette-btn`} onClick={this.handleSubmit}>
                         +
                     </button>
                 </div>

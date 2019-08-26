@@ -68,19 +68,22 @@
   position: fixed;
 }
 
-.project-form {
+.project-page-form {
   grid-area: 2 / 2 / 5 / 3;
   margin: 206px auto;
   position: fixed;
 }
 
-.add-project {
-  position: fixed;
+.project-page-add {
+  background-color: transparent;
   left: 50%;
   margin-bottom: 330px;
   margin-left: -122.5px; 
+  position: fixed;
+  border-bottom: 1px solid #626262;
+  width: 245px;
 }
 
-.save-palette {
+.project-page-save {
   display: none;
 }

@@ -34,7 +34,7 @@ class Projects extends Component {
           {!this.generateProjects().length && 
             <div className="projects-container">
               <h3 className="no-projects">No projects added yet!</h3>
-              <ProjectForm />
+              <ProjectForm projects={true} />
             </div>
           }
       </main>
