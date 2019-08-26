@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { fetchAddProject } from '../../api/apiCalls';
 import './ProjectForm.scss';
 
-class ProjectForm extends Component {
+export class ProjectForm extends Component {
     constructor() {
         super();
         this.state = {

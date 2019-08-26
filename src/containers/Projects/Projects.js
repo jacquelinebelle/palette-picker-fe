@@ -4,7 +4,7 @@ import './Projects.css';
 import ProjectForm from '../ProjectForm/ProjectForm';
 import { fetchDeleteProject } from '../../api/apiCalls';
 
-class Projects extends Component {
+export class Projects extends Component {
 
   state = {
     hasPalettes: false

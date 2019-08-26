@@ -4,7 +4,7 @@ import { setGeneratedColors, openPaletteGenerator } from '../../actions';
 import './PaletteGenerator.scss';
 var ColorScheme = require('color-scheme');
 
-class PaletteGenerator extends Component {
+export class PaletteGenerator extends Component {
     constructor() {
         super();
         this.state = {
@@ -32,7 +32,7 @@ class PaletteGenerator extends Component {
         var palette = colors.map(color => '#' + color).slice(10, 15);
 
         this.setState({ color_1: palette[0], color_2: palette[1], color_3: palette[2], color_4: palette[3], color_5: palette[4] });
-        this.props.setGeneratedColors(palette);
+        this.props.handleSetGeneratedColors(palette);
     }
 
     togglePaletteGenerator = () => {
@@ -66,7 +66,7 @@ class PaletteGenerator extends Component {
                     <section className="color color-4" style={{background: this.state.color_4}}/>
                     <section className="color color-5" style={{background: this.state.color_5}}/>
                     <input type="text" maxLength="35" value={this.state.paletteName} className="palette-name-input" placeholder="Plette name" onChange={this.handleOnChange}/>
-                    <button className="gen-add-btn generate-btn" onClick={this.generatePalette}>Generate</button>
+                    <button className="gen-add-btn generate-btn" onClick={this.generatePalette} >Generate</button>
                     <button className="gen-add-btn delete-btn" onClick={this.submitNewPalette}
                     >Add</button>
                     <button className="close-gen-btn" onClick={this.togglePaletteGenerator}
@@ -83,7 +83,7 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-    setGeneratedColors: (colors) => dispatch(setGeneratedColors(colors)),
+    handleSetGeneratedColors: (colors) => dispatch(setGeneratedColors(colors)),
     handleOpenPaletteGenerator: () => dispatch(openPaletteGenerator())
 });
 

@@ -3,7 +3,7 @@ import './Palettes.css';
 import { connect } from 'react-redux';
 import { openPaletteGenerator } from '../../actions';
 
-class Palettes extends Component {
+export class Palettes extends Component {
 
   togglePaletteGenerator = () => {
     this.props.handleOpenPaletteGenerator()
@@ -15,10 +15,10 @@ class Palettes extends Component {
         return <p>No palettes found under this project</p>
           
       } else {
-        return palettes.map(palette => {
+        return palettes.map((palette, i) => {
           return (
-            <div key={palette.id} id={palette.id} className="palette-container">
-              <h4 className="palette-name">{palette.name}</h4>
+            <div key={i} id={palette.id} className="palette-container">
+              <h4 className="palette-name" >{palette.name}</h4>
               <section className="pal-colors-container">
                 <section className="pal-color pal-color-1" style={{background: palette.color_1}} />
                 <section className="pal-color pal-color-2" style={{background: palette.color_2}}/>
