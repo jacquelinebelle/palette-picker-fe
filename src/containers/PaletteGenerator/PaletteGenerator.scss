@@ -70,13 +70,14 @@
 }
 
 .generate-btn:focus {
-    bottom: 32px;
-    right: 43px;
-    outline: white;
     border: 2px solid #626262;
     border-radius: 50px;
+    bottom: 34px;
+    outline: white;
     padding: 5px;
     padding-top: 7px;
+    right: 48px;
+    width: 58px;
    
 }
 

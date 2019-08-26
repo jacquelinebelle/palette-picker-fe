@@ -9,7 +9,7 @@ const Background = ({ color_1, color_2, color_3, color_4, color_5 }) => {
             <div className="background-container">
                 <div 
                     className="ellipse" 
-                    style={{background: color_4}} />
+                    style={{background: color_5}} />
                 <svg 
                     className="triangle"
                     style={{fill: color_2}}>
@@ -25,7 +25,7 @@ const Background = ({ color_1, color_2, color_3, color_4, color_5 }) => {
                     style={{background: color_1}} />
                 <div 
                     className="square square-2"
-                    style={{background: color_5}} />
+                    style={{background: color_4}} />
             </div>
         </section>
     )
