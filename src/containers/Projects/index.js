@@ -31,7 +31,6 @@ class Projects extends Component {
         <div className="projects-container">
           <h3 className="project-title">Projects</h3>
         {this.generateProjects()}
-        <ProjectForm getUpdatedProject={this.props.getUpdatedProject}/> 
         </div>
       </div>
     )
