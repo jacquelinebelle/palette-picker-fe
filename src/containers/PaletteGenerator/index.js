@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setGeneratedColors } from '../../actions';
+import ProjectForm from '../ProjectForm';
 import './PaletteGenerator.scss';
+import generate from '../../assets/generate.svg'
 var ColorScheme = require('color-scheme');
 
 class PaletteGenerator extends Component {
@@ -42,9 +44,10 @@ class PaletteGenerator extends Component {
                 <section className="color color-3" style={{background: this.state.color_3}}/>
                 <section className="color color-4" style={{background: this.state.color_4}}/>
                 <section className="color color-5" style={{background: this.state.color_5}}/>
+                <ProjectForm />
                 <button className="generate-btn"
-                    onClick={this.generatePalette}
-                    >generate
+                    onClick={this.generatePalette}>
+                    <img className="generate-icon" src={generate} />
                 </button>
             </article>
         )

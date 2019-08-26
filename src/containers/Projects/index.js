@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import './Projects.css';
-import ProjectForm from '../ProjectForm/ProjectForm';
+import ProjectForm from '../ProjectForm';
 import { deleteProject } from '../../api/apiCalls';
 
 class Projects extends Component {

@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import Background from '../../components/Background';
-import PaletteGenerator from '../PaletteGenerator/PaletteGenerator';
+import PaletteGenerator from '../PaletteGenerator';
 import { setProjects } from '../../actions';
 import { getProjects } from '../../api/apiCalls';
-import Projects from '../Projects/Projects';
+import Projects from '../Projects';
 import { connect } from 'react-redux';
 import './App.scss';
 
 class App extends Component {
 
   componentDidMount() {
-      this.props.handleSetProjects()
+      // this.props.handleSetProjects()
   }
 
   getUpdatedProject = () => {

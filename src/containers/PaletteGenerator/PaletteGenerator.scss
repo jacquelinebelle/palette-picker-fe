@@ -7,11 +7,10 @@
     margin-top: 40px;
     position: relative;
     width: 425px;
-    display: none;
 }
 
 .color {
-    height: 295px;
+    height: 335px;
     position: absolute;
     top: 0;
     width: 85px;
@@ -45,6 +44,39 @@
 }
 
 .generate-btn {
-    bottom: 10px;
+    bottom: 39px;
+    border: none;
+    cursor: pointer;
     position: absolute;
+    right: 50px;
 }
+
+.generate-icon {
+    height: 40px;
+}
+
+.generate-btn:hover {
+    animation: roll 3s infinite;
+    transform: rotate(30deg);
+}
+
+@keyframes roll {
+    0% {
+      transform: rotate(0);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+}
+
+.generate-btn:focus {
+    bottom: 32px;
+    right: 43px;
+    outline: white;
+    border: 2px solid #626262;
+    border-radius: 50px;
+    padding: 5px;
+    padding-top: 7px;
+   
+}
+
