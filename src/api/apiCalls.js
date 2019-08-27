@@ -78,3 +78,20 @@ export const fetchAddProject = projectName => {
       
     }).then(data =>  data.palette)
   }
+
+  export const fetchUpdatePalette = (id, updatedPalette) => {
+    console.log(id)
+    return  fetch(`http://localhost:3001/api/v1/projects/palettes/${id}`, {
+        method: 'PATCH',
+        headers: {'Content-type' : 'application/json'},
+        body: JSON.stringify({ ...updatedPalette})
+    })
+    .then(res => {
+      if (res.ok) {
+       return res.json()
+      } else {
+        throw new Error('Cannot delete palette')
+      }
+      
+    }).then(data =>  data.palette)
+  }

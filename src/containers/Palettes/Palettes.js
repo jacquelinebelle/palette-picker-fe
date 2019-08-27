@@ -6,8 +6,12 @@ import { fetchDeletePalette } from '../../api/apiCalls';
 
 export class Palettes extends Component {
 
-  togglePaletteGenerator = () => {
-    this.props.handleOpenPaletteGenerator()
+  togglePaletteGenerator = e => {
+    const paletteName = e.target.id
+
+    const paletteActionType = e.target.name;
+    const id = parseInt(e.target.parentElement.id)
+    this.props.handleOpenPaletteGenerator(paletteActionType, id, paletteName)
   }
 
   handleDeletePalette = e => {
@@ -28,6 +32,12 @@ export class Palettes extends Component {
         return palettes.map((palette, i) => {
           return (
             <div key={i} id={palette.id} className="palette-container">
+              <button onClick={this.handleDeletePalette} className="delete-palette-btn" id={palette.project_id}>&#xd7;</button>
+              <button onClick={this.togglePaletteGenerator} name="Update" className="edit-palette-btn" id={palette.name}>
+                {/* <p className="dot"></p>
+                <p className="dot"></p>
+                <p className="dot"></p> */}
+              </button>
               <h4 className="palette-name" >{palette.name}</h4>
               <section className="pal-colors-container">
                 <section className="pal-color pal-color-1" style={{background: palette.color_1}} />
@@ -36,7 +46,6 @@ export class Palettes extends Component {
                 <section className="pal-color pal-color-4" style={{background: palette.color_4}}/>
                 <section className="pal-color pal-color-5" style={{background: palette.color_5}}/>
             </section>
-            <button onClick={this.handleDeletePalette} id={palette.project_id}>&#xd7;</button>
             </div>
           )
         })
@@ -44,10 +53,11 @@ export class Palettes extends Component {
   }
 
   render() {
+
     return (
       <div className="palettes-body">
         {this.generatePalettes()}
-        {(this.props.selectedProject !== 0 && this.props.openPaletteGen === false) && <button onClick={this.togglePaletteGenerator} className="add-palette-btn" >Add new palette</button>}
+        {(this.props.selectedProject !== 0 && this.props.openPaletteGen.open === false) && <button onClick={this.togglePaletteGenerator} name="Add" className="add-palette-btn">Add new palette</button>}
       </div>
     )
   }
@@ -60,6 +70,6 @@ export const mapStateToProps = state => ({
 })
 
 export const mapDispatchToProps = dispatch => ({
-  handleOpenPaletteGenerator: () => dispatch(openPaletteGenerator())
+  handleOpenPaletteGenerator: (paletteActionType, id, palleteName) => dispatch(openPaletteGenerator(paletteActionType, id, palleteName))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Palettes);

@@ -18,6 +18,9 @@ export const projectSelected = selected => ({
     selected
 })
 
-export const openPaletteGenerator = () => ({
+export const openPaletteGenerator = (paletteActionType, paletteUpdatingId, paletteUpdatingName) => ({
     type: 'OPEN_PALETTE_GENERATOR',
+    paletteActionType,
+    paletteUpdatingId,
+    paletteUpdatingName
 })

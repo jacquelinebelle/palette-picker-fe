@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Background from '../../components/Background';
 import PaletteGenerator from '../PaletteGenerator/PaletteGenerator';
 import { setProjects } from '../../actions';
-import { fetchProjects, fetchAddPalette, fetchPalettes } from '../../api/apiCalls';
+import { fetchProjects, fetchAddPalette, fetchPalettes, fetchUpdatePalette } from '../../api/apiCalls';
 import Projects from '../Projects/Projects';
 import Palettes from '../Palettes/Palettes';
 import { connect } from 'react-redux';
@@ -20,8 +20,9 @@ export class App extends Component {
     this.handleFetchPalettes()
   }
 
-  addPalette = name => {
-    const {colors, selectedProject} = this.props;
+  addAndUpdatePalette = (name) => {
+
+    const {colors, selectedProject, openPaletteGen} = this.props;
     const newPalette = {
       name,
       color_1: colors[0],
@@ -30,9 +31,17 @@ export class App extends Component {
       color_4: colors[3],
       color_5: colors[4],
     }
-    fetchAddPalette(selectedProject, newPalette).then(() =>
-      this.getPalettes(selectedProject)
-    )
+
+    if (openPaletteGen.type === 'Add') {
+      fetchAddPalette(selectedProject, newPalette).then(() =>
+        this.getPalettes(selectedProject)
+      )
+    } else {
+      fetchUpdatePalette(openPaletteGen.paletteUpdatingId, newPalette).then(() =>
+        this.getPalettes(selectedProject)
+      )
+    }
+    
   }
 
   getPalettes = id => {
@@ -42,7 +51,6 @@ export class App extends Component {
   }
 
   handleFetchPalettes = (id) => {
-    console.log(id)
     fetchPalettes(id).then(data => {
 
       if (data === 'Cannot fetch palettes') {
@@ -62,7 +70,7 @@ export class App extends Component {
         <header>
           <h1>Palette Picker</h1>
         </header>
-        <PaletteGenerator addPalette={this.addPalette}/>
+        <PaletteGenerator addAndUpdatePalette={this.addAndUpdatePalette}/>
         <Palettes handleFetchPalettes={this.handleFetchPalettes} />
         <Projects getUpdatedProject={this.getUpdatedProject} getPalettes={this.getPalettes}/>
         <Background 
@@ -79,7 +87,8 @@ export class App extends Component {
 
 export const mapStateToProps = (state) => ({
   colors: state.colors,
-  selectedProject: state.selectedProject
+  selectedProject: state.selectedProject,
+  openPaletteGen: state.openPaletteGen
 });
 
 export const mapDispatchToProps = dispatch => ({

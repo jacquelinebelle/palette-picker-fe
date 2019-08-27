@@ -12,7 +12,7 @@ describe('PaletteGenerator', () => {
      props = {
       handleSetGeneratedColors: jest.fn(),
       handleOpenPaletteGenerator: jest.fn(),
-      addPalette: jest.fn()
+      addAndUpdatePalette: jest.fn()
     }
   wrapper = shallow(<PaletteGenerator {...props}/>);
   })
@@ -40,7 +40,7 @@ describe('PaletteGenerator', () => {
 
   it.skip('submitNewPalette should call other functiions', () => {
     wrapper.instance().submitNewPalette = jest.fn();
-    wrapper.find('.delete-btn').prop('onClick')()
+    wrapper.find('.add-palette-btn').prop('onClick')()
     expect(wrapper.instance().submitNewPalette).toHaveBeenCalled();
   });
 

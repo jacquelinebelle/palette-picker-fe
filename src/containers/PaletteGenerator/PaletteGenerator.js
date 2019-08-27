@@ -33,10 +33,12 @@ export class PaletteGenerator extends Component {
 
         this.setState({ color_1: palette[0], color_2: palette[1], color_3: palette[2], color_4: palette[3], color_5: palette[4] });
         this.props.handleSetGeneratedColors(palette);
+        
+        this.setState({paletteName: this.props.openPaletteGen.paletteUpdatingName})
     }
 
     togglePaletteGenerator = () => {
-        this.props.handleOpenPaletteGenerator()
+        this.props.handleOpenPaletteGenerator('add', 0)
       }
 
     handleOnChange = e => {
@@ -46,7 +48,7 @@ export class PaletteGenerator extends Component {
 
     submitNewPalette = () => {
         const { paletteName } = this.state
-        this.props.addPalette(paletteName)
+        this.props.addAndUpdatePalette(paletteName)
         this.props.handleOpenPaletteGenerator()
         this.clearInput()
     }
@@ -55,8 +57,11 @@ export class PaletteGenerator extends Component {
         this.setState({paletteName: ""})
     }
 
+
     render() {
-        const palleteGenstyle = this.props.openPaletteGen ? {display: 'flex'} : {display: 'none'}
+        const { open } = this.props.openPaletteGen;
+        const palleteGenstyle = open ? {display: 'flex'} : {display: 'none'}
+    
         return (
             <div className="palette-gen-container" style={palleteGenstyle}>
                 <article  className="container" >
@@ -67,8 +72,8 @@ export class PaletteGenerator extends Component {
                     <section className="color color-5" style={{background: this.state.color_5}}/>
                     <input type="text" maxLength="35" value={this.state.paletteName} className="palette-name-input" placeholder="Plette name" onChange={this.handleOnChange}/>
                     <button className="gen-add-btn generate-btn" onClick={this.generatePalette} >Generate</button>
-                    <button className="gen-add-btn delete-btn" onClick={this.submitNewPalette}
-                    >Add</button>
+                    <button className="gen-add-btn add-update-palette-btn" onClick={this.submitNewPalette}
+                    >{this.props.openPaletteGen.type}</button>
                     <button className="close-gen-btn" onClick={this.togglePaletteGenerator}
                     >&#xd7;</button>
                 </article>
@@ -84,7 +89,7 @@ export const mapStateToProps = state => ({
 
 export const mapDispatchToProps = (dispatch) => ({
     handleSetGeneratedColors: (colors) => dispatch(setGeneratedColors(colors)),
-    handleOpenPaletteGenerator: () => dispatch(openPaletteGenerator())
+    handleOpenPaletteGenerator: (type, id) => dispatch(openPaletteGenerator(type, id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaletteGenerator);
