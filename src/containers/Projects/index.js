@@ -1,41 +1,52 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import './Projects.css';
-import ProjectForm from '../ProjectForm/ProjectForm';
-import { fetchDeleteProject } from '../../api/apiCalls';
+import ProjectForm from '../ProjectForm';
+import Palettes from '../Palettes';
+import { fetchPalettes, fetchProjects, fetchDeleteProject } from '../../api/apiCalls';
 
 export class Projects extends Component {
-
-  state = {
-    hasPalettes: false
+  constructor() {
+    super();
+    this.state = {
+      projects: []
+    }
   }
 
-  handleGetPalettes = e => {
-    const id = parseInt(e.target.parentElement.id);
-    this.props.getPalettes(id)
+  componentDidMount = async () => {
+    const projects = await fetchProjects();
+    this.setState({ projects })
+
   }
 
-  handleDeleteProject = e => {
-    const id = parseInt(e.target.parentElement.id)
-    fetchDeleteProject(id).then(() => 
-      this.props.getUpdatedProject()
-    ) 
+  getProjects = async () => {
+    const projects = await fetchProjects();
+    return this.displayProjects(projects)
   }
 
   displayProjects = () => {
-    const { projects } = this.props;
-    return projects.map(project => {
+    return this.state.projects.map(project => {
       return (
         <div key={project.id} className="project-container">
           <h4 className="project-name">{project.name}</h4>
-          {!project.palettes && <p className="no-palettes">No palettes saved to this project yet.</p>}
-          <button onClick={this.handleDeleteProject} id={project.id} className="delete-project-btn">&#xd7;</button>
+          <button onClick={id => this.deleteProject(project.id)} id={project.id} className="delete-project-btn">X</button>
+          <Palettes projectId={project.id} />
         </div>
       )
+      
     })
   }
-  render() {
 
+  deleteProject = (id) => {
+    fetchDeleteProject(id);
+    let index = this.state.projects.findIndex(project => project.id === id);
+    console.log(index)
+    this.state.projects.splice(index, 1)
+    this.setState({ projects: this.state.projects });
+    console.log(this.state.projects)
+  }
+
+  render() {
     return (
       <main className="projects-body">
         <div className="projects-container">
@@ -59,4 +70,4 @@ export const mapStateToProps = state => ({
 
 
 
-export default connect(mapStateToProps, null)(Projects)
+export default connect(mapStateToProps)(Projects)

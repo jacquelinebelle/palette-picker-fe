@@ -2,9 +2,35 @@ import React, { Component } from 'react';
 import './Palettes.css';
 import { connect } from 'react-redux';
 import { openPaletteGenerator } from '../../actions';
-import { fetchDeletePalette } from '../../api/apiCalls';
+import { fetchPalettes, fetchDeletePalette } from '../../api/apiCalls';
 
 export class Palettes extends Component {
+  constructor() {
+    super();
+    this.state = {
+      palettes: []
+    }
+  }
+
+  componentDidMount = async () => {
+    // let project_id = this.props.id;
+    // try {
+    //   const palettes = await fetchPalettes(project_id);
+    //   console.log(palettes)
+    //   this.setState({ palettes });
+    //   if (!this.state.palettes) {
+    //     console.log('o well')
+    //   }
+    // } catch (error) {
+    //   console.log(error)
+    // }
+    const palettes = await fetchPalettes(this.props.projectId)
+    if (typeof palettes === 'string') {
+      this.setState({ palettes: '404' })
+    } else {
+      this.setState({ palettes })
+    }
+  }
 
   togglePaletteGenerator = () => {
     this.props.handleOpenPaletteGenerator()
@@ -41,12 +67,37 @@ export class Palettes extends Component {
       }
   }
 
+  displayPalettes =  () => {
+    const { palettes } = this.state;
+    if (typeof palettes !== 'string') {
+      return palettes.map(pal => {
+        return (
+            <>
+              <h5 className="palette-name">{pal.name}</h5>
+              <div className="palette-container" key={pal.id}>
+                <div className="pal-color" style={{background: pal.color_1}} />
+                <div className="pal-color" style={{background: pal.color_2}} />
+                <div className="pal-color" style={{background: pal.color_3}} />
+                <div className="pal-color" style={{background: pal.color_4}} />
+                <div className="pal-color" style={{background: pal.color_5}} />
+              </div>
+            </>
+        )
+      })
+    } else {
+      return <p className="no-palettes">No palettes saved to this project yet.</p>
+    }
+  }
+
   render() {
     return (
-      <div className="palettes-body">
-        {this.generatePalettes()}
-        {(this.props.selectedProject !== 0 && this.props.openPaletteGen === false) && <button onClick={this.togglePaletteGenerator} className="add-palette-btn" >Add new palette</button>}
-      </div>
+      // <div className="palettes-body">
+      //   {this.generatePalettes()}
+      //   {(this.props.selectedProject !== 0 && this.props.openPaletteGen === false) && <button onClick={this.togglePaletteGenerator} className="add-palette-btn" >Add new palette</button>}
+      // </div>
+      <section className="palettes-section">
+        {this.displayPalettes()}
+      </section>
     )
   }
 }

@@ -1,12 +1,11 @@
-export const fetchProjects = () => {
-  return  fetch('https://palette-picker-backend.herokuapp.com/api/v1/projects')
-        .then(res => {
-          if (res.ok) {
-           return res.json()
-          } else {
-            throw new Error('Cannot fetch projects')
-          }
-        }).then(data =>  data.projects)
+export const fetchProjects = async () => {
+  try {
+    const response = await fetch('https://palette-picker-backend.herokuapp.com/api/v1/projects')
+    const projects = await response.json();
+    return projects.projects
+  } catch (error) {
+    console.log(error)
+  }      
 }
 
 export const fetchAddProject = projectName => {
@@ -38,15 +37,17 @@ export const fetchAddProject = projectName => {
     }).then(data =>  data.project)
   }
 
-  export const fetchPalettes = id => {
-    return  fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/${id}/palettes`)
-              .then(res => {
-                if (res.ok) {
-                return res.json()
-                } else {
-                  return {palettes: 'Cannot fetch palettes'}
-                }
-              }).then(data =>  (data.palettes))
+  export const fetchPalettes = async id => {
+    try {
+      const response = await fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/${id}/palettes`)
+      if (!response.ok) {
+        return '404'
+      }
+      const palettes = await response.json();
+      return palettes.palettes;
+    } catch (error) {
+      return 'no palettes here';
+    }
   }
 
   export const fetchAddPalette = (id, newPalette) => {

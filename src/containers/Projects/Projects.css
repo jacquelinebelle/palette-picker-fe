@@ -22,15 +22,16 @@
   cursor: pointer;
   min-height: 180px;
   margin-top: 10px;
+  padding-bottom: 20px;
   position: relative;
   width: 250px;
 }
 
 .project-name {
-  font-size: 16px;
-  padding-left: 5px;
-  position: absolute;
-  left: 20px;
+  font-size: 20px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+  text-shadow: 0px 0.5px #626262;
 }
 
 .delete-project-btn {

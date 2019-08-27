@@ -6,3 +6,4 @@ export const palettesReducer = (state = [], action) => {
       return state;
   }
 }
+

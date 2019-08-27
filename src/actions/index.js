@@ -26,3 +26,4 @@ export const flipSelect = bool => ({
     type: 'FLIP_SELECT',
     bool
 })
+
