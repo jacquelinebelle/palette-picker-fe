@@ -1,22 +1,9 @@
-.palette-gen-container {
-    align-items: center;
-    backdrop-filter: blur(3px);
-    background: rgba(255, 255, 255, 0.781);
-    display: none;
-    height: 100vh;
-    justify-content: center;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100vw; 
-    z-index: 9;
-}
-
 .container {
     background-color: white;
     border-radius: 25px;
     box-shadow: 8px 0px 23px rgba(0, 0, 0, 0.07);
     height: 450px;
+    margin: 40px auto;
     position: relative;
     width: 425px;
 }

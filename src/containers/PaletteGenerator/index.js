@@ -58,7 +58,6 @@ export class PaletteGenerator extends Component {
     }
 
     render() {
-        const palleteGenstyle = this.props.openPaletteGen ? {display: 'flex'} : {display: 'none'}
         return (
             <article className="container">
                 <section className="color color-1" style={{background: this.state.color_1}} />

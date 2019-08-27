@@ -25,7 +25,6 @@ export class Projects extends Component {
   displayProjects = () => {
     const { projects } = this.props;
     return projects.map(project => {
-      const selectedstyle = (project.id === selectedProject) ? {background: '#385894'} : null;
       return (
         <div key={project.id} className="project-container">
           <h4 className="project-name">{project.name}</h4>

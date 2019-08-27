@@ -1,5 +1,5 @@
 export const fetchProjects = () => {
-  return  fetch('http://localhost:3001/api/v1/projects')
+  return  fetch('https://palette-picker-backend.herokuapp.com/api/v1/projects')
         .then(res => {
           if (res.ok) {
            return res.json()
@@ -10,7 +10,8 @@ export const fetchProjects = () => {
 }
 
 export const fetchAddProject = projectName => {
-    return  fetch('http://localhost:3001/api/v1/projects', {
+  console.log('bb')
+    return  fetch('https://palette-picker-backend.herokuapp.com/api/v1/projects', {
         method: 'POST',
         headers: {'Content-type' : 'application/json'},
         body: JSON.stringify({name: projectName})
@@ -24,9 +25,8 @@ export const fetchAddProject = projectName => {
     }).then(data =>  data.project)
   }
 
-
   export const fetchDeleteProject = id => {
-    return  fetch(`http://localhost:3001/api/v1/projects/${id}`, {
+    return  fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/${id}`, {
         method: 'DELETE'
     })
     .then(res => {
@@ -38,9 +38,8 @@ export const fetchAddProject = projectName => {
     }).then(data =>  data.project)
   }
 
-
   export const fetchPalettes = id => {
-    return  fetch(`http://localhost:3001/api/v1/projects/${id}/palettes`)
+    return  fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/${id}/palettes`)
               .then(res => {
                 if (res.ok) {
                 return res.json()
@@ -51,7 +50,7 @@ export const fetchAddProject = projectName => {
   }
 
   export const fetchAddPalette = (id, newPalette) => {
-    return  fetch(`http://localhost:3001/api/v1/projects/${id}`, {
+    return  fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/${id}`, {
         method: 'POST',
         headers: {'Content-type' : 'application/json'},
         body: JSON.stringify({ ...newPalette })
@@ -66,7 +65,7 @@ export const fetchAddProject = projectName => {
   }
 
   export const fetchDeletePalette = id => {
-    return  fetch(`http://localhost:3001/api/v1/projects/palettes/${id}`, {
+    return  fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/palettes/${id}`, {
         method: 'DELETE'
     })
     .then(res => {

@@ -3,12 +3,10 @@ import { Switch, Route } from 'react-router-dom';
 import Background from '../../components/Background';
 import PaletteGenerator from '../PaletteGenerator';
 import { setProjects } from '../../actions';
-import { getProjects } from '../../api/apiCalls';
 import Projects from '../Projects';
 import Nav from '../../components/Nav';
 import { fetchProjects, fetchAddPalette, fetchPalettes } from '../../api/apiCalls';
-import Projects from '../Projects/Projects';
-import Palettes from '../Palettes/Palettes';
+import Palettes from '../Palettes';
 import { connect } from 'react-redux';
 import './App.scss';
 import {projectSelected, setPalettes } from '../../actions';
@@ -16,9 +14,9 @@ import {projectSelected, setPalettes } from '../../actions';
 export class App extends Component {
 
   async componentDidMount() {
-    const projects = await getProjects();
-    console.log(projects.projects)
-    this.props.setProjects(projects.projects);
+    const projects = await fetchProjects();
+    console.log(projects)
+    this.props.setProjects(projects);
   }
 
   getUpdatedProject = () => {

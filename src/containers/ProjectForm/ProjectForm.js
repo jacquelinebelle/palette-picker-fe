@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { fetchAddProject } from '../../api/apiCalls';
+// import { fetchAddProject } from '../../api/apiCalls';
 import './ProjectForm.scss';
 
 export class ProjectForm extends Component {
@@ -17,9 +17,9 @@ export class ProjectForm extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         const name = this.state.name;
-        fetchAddProject(name).then(() => 
-            this.props.getUpdatedProject()
-        )
+        // fetchAddProject(name).then(() => 
+        //     this.props.getUpdatedProject()
+        // )
         this.clearInput()
     }
 
