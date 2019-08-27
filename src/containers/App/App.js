@@ -42,6 +42,7 @@ export class App extends Component {
   }
 
   handleFetchPalettes = (id) => {
+    console.log(id)
     fetchPalettes(id).then(data => {
 
       if (data === 'Cannot fetch palettes') {
@@ -62,7 +63,7 @@ export class App extends Component {
           <h1>Palette Picker</h1>
         </header>
         <PaletteGenerator addPalette={this.addPalette}/>
-        <Palettes getPalettes={this.getPalettes} />
+        <Palettes handleFetchPalettes={this.handleFetchPalettes} />
         <Projects getUpdatedProject={this.getUpdatedProject} getPalettes={this.getPalettes}/>
         <Background 
           color_1={colors[0]}

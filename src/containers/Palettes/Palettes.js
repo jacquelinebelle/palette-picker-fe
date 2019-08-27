@@ -12,8 +12,10 @@ export class Palettes extends Component {
 
   handleDeletePalette = e => {
     const id = parseInt(e.target.parentElement.id)
-    fetchDeletePalette(id).then(() =>
-      this.props.getPalettes(id)
+    const projectId = parseInt(e.target.id)
+    fetchDeletePalette(id)
+    .then(() =>
+      this.props.handleFetchPalettes(projectId)
     )
   }
 
@@ -34,7 +36,7 @@ export class Palettes extends Component {
                 <section className="pal-color pal-color-4" style={{background: palette.color_4}}/>
                 <section className="pal-color pal-color-5" style={{background: palette.color_5}}/>
             </section>
-            <button onClick={this.handleDeletePalette}>&#xd7;</button>
+            <button onClick={this.handleDeletePalette} id={palette.project_id}>&#xd7;</button>
             </div>
           )
         })
