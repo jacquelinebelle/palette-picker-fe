@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchAddProject, fetchProjects, fetchAddPalette } from '../../api/apiCalls';
+import { flipSelect } from '../../actions';
+import arrow from '../../assets/arrow.svg';
 import './ProjectForm.scss';
 
 class ProjectForm extends Component {
@@ -30,6 +32,7 @@ class ProjectForm extends Component {
             this.clearInput()
         } else if (input === 'palette') {
             this.setState({ select: true })
+            this.props.flipSelect(true);
         } else if (input === 'select-project') {
             console.log('beep');
         }
@@ -47,6 +50,8 @@ class ProjectForm extends Component {
             color_5: colors[4]
         }
         await fetchAddPalette(id, palette);
+        this.setState({ select: false });
+        this.props.flipSelect(false);
     }
 
     handleKeyUp = (e, input) => {
@@ -69,7 +74,7 @@ class ProjectForm extends Component {
 
     render() {
         return (
-            <form className={this.props.projects ? `project-page-form` : `project-form`}>
+            <form className={`${this.state.select} ${this.props.projects ? `project-page-form` : `project-form`}`}>
                 <div className={this.props.projects ? `project-page-add` : `add-project`}>
                     <input 
                         className={`project-input`}
@@ -83,9 +88,9 @@ class ProjectForm extends Component {
                         +
                     </button>
                 </div>
-                <div className={this.props.projects ? `project-page-save` : `save-palette`}>
-                    { !this.state.select &&
-                        <>
+                <div className={`${this.state.select} ${this.props.projects ? `project-page-save` : `save-palette`}`}>
+                    
+                      
                             <input 
                                 className={`palette-input`}
                                 type="text"
@@ -99,24 +104,20 @@ class ProjectForm extends Component {
                                 onKeyUp={e => this.handleKeyUp(e, 'select-project')}>
                                     +
                             </button>
-                        </>
-                    }
+                </div>
+                   
+                    
                     { this.state.select &&
-                        <>
+                        <div className="dropdown-container">
                             <select className={`project-dropdown`}
                             onChange={this.savePalette}
                             >
-                                <option value="">PROJECT</option>
+                                <option value="">CLICK TO SELECT PROJECT</option>
                                 {this.getProjectOptions()}
                             </select>
-                            <button 
-                                className={`save-palette-btn`}      onClick={e => this.handleSubmit(e, 'select-project')}
-                            >
-                                    +
-                            </button>
-                        </>
+                            <img className="arrow" src={arrow} />
+                        </div>
                     }
-                </div>
             </form>
         )
     }
@@ -126,5 +127,9 @@ export const mapStateToProps = (state) => ({
     colors: state.colors,
     selectedProject: state.selectedProject
   });
+
+export const mapDispatchToProps = (dispatch) => ({
+  flipSelect: (bool) => dispatch(flipSelect(bool))
+})
   
-  export default connect(mapStateToProps)(ProjectForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectForm);

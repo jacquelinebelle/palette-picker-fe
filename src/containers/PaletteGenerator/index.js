@@ -59,7 +59,7 @@ export class PaletteGenerator extends Component {
 
     render() {
         return (
-            <article className="container">
+            <article className={`${this.props.select}-container container`}>
                 <section className="color color-1" style={{background: this.state.color_1}} />
                 <section className="color color-2" style={{background: this.state.color_2}}/>
                 <section className="color color-3" style={{background: this.state.color_3}}/>
@@ -76,7 +76,8 @@ export class PaletteGenerator extends Component {
 }
 
 export const mapStateToProps = state => ({
-    openPaletteGen: state.openPaletteGen
+    openPaletteGen: state.openPaletteGen,
+    select: state.select
 });
 
 export const mapDispatchToProps = (dispatch) => ({

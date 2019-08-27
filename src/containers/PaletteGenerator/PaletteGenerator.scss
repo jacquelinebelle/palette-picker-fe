@@ -2,10 +2,20 @@
     background-color: white;
     border-radius: 25px;
     box-shadow: 8px 0px 23px rgba(0, 0, 0, 0.07);
-    height: 450px;
     margin: 40px auto;
     position: relative;
     width: 425px;
+}
+
+.false-container {
+    min-height: 450px;
+}
+
+.true-container {
+    min-height: 490px;
+    .generate-btn {
+        bottom: 50px;
+    }
 }
 
 
@@ -44,7 +54,7 @@
 }
 
 .generate-btn {
-    bottom: 39px;
+    bottom: 31px;
     border: none;
     cursor: pointer;
     position: absolute;

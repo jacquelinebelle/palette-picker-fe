@@ -21,3 +21,8 @@ export const projectSelected = selected => ({
 export const openPaletteGenerator = () => ({
     type: 'OPEN_PALETTE_GENERATOR',
 })
+
+export const flipSelect = bool => ({
+    type: 'FLIP_SELECT',
+    bool
+})

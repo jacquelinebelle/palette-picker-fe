@@ -10,6 +10,7 @@
 
 .add-project, .save-palette {
   border-bottom: 1px solid #626262;
+  color: #626262;
   width: 245px;
 }
 
@@ -21,7 +22,6 @@
 .save-palette {
   margin-top: 10px;
   position: absolute;
-  top: -2px;
 }
 
 .project-input, .palette-input {
@@ -51,4 +51,42 @@
   right: -1.5px;
   width: 25px;
   text-align: center;
+}
+
+form.true {
+  bottom: 103px;
+}
+
+// .save-palette.true {
+//   top: 31px;
+// }
+
+.dropdown-container {
+  border-bottom: 1px solid #626262;
+  bottom: -82px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  position: absolute; 
+}
+
+.project-dropdown {
+  background: white;
+  border: none;
+  color: #626262;
+  font-size: 12.9px;
+  padding-bottom: 6px;
+	-webkit-appearance: none;
+  width: 245px;
+}
+
+.arrow {
+  height: 11px;
+  margin-top: 4px;
+  position: absolute;
+  right: 5px;
+}
+
+
+.save-palette.true {
+  top: -2px;
 }
