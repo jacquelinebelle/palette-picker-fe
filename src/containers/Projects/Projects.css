@@ -86,3 +86,7 @@
 .project-page-save {
   display: none;
 }
+
+.false-input, .false-name {
+  display: none;
+}

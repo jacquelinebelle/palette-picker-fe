@@ -79,17 +79,30 @@ export const fetchAddProject = projectName => {
     }).then(data =>  data.palette)
   }
 
-  export const fetchPatchProject = (id, body) => {
-      return  fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/${id}`, {
+export const fetchPatchProject = async (id, body) => {
+    try {
+        const response = await fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/${id}`, {
           method: 'PATCH',
           headers: {'Content-type' : 'application/json'},
-          body: JSON.stringify({body})
+          body: JSON.stringify(body)
       })
-      .then(res => {
-        if (res.ok) {
-         return res.json()
-        } else {
-          throw new Error('Cannot modify project')
-        }
-      }).then(data =>  data.project)
+        const result = await response.json();
+        return result;
+    } catch(error) {
+      console.log(error)
     }
+  }
+
+export const fetchPatchPalette = async (id, body) => {
+  try {
+      const response = await fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/palettes/${id}`, {
+        method: 'PATCH',
+        headers: {'Content-type' : 'application/json'},
+        body: JSON.stringify(body)
+    })
+      const result = await response.json();
+      return result;
+  } catch(error) {
+    console.log(error)
+  }
+}

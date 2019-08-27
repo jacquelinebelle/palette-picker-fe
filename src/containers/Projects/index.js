@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import './Projects.css';
 import ProjectForm from '../ProjectForm';
 import Palettes from '../Palettes';
-import { fetchPalettes, fetchProjects, fetchDeleteProject } from '../../api/apiCalls';
+import { fetchProjects, fetchDeleteProject, fetchPatchProject } from '../../api/apiCalls';
 
 export class Projects extends Component {
   constructor() {
     super();
     this.state = {
-      projects: []
+      projects: [],
+      name: '',
+      input: false
     }
   }
 
@@ -24,11 +26,40 @@ export class Projects extends Component {
     return this.displayProjects(projects)
   }
 
+  handleChange = (e) => {
+    this.setState({ name: e.target.value })
+  }
+
+  updateProjectName = (e, id) => {
+    let update = { name: this.state.name }
+    if (e.keyCode === 13) {
+      fetchPatchProject(id, update);
+      let index = this.state.projects.findIndex(project => project.id === id);
+      this.state.projects[index].name = this.state.name;
+      this.setState({ input: false })
+    }
+  }
+
+  changeState = () => {
+    this.setState({ input: true });
+  }
+
   displayProjects = () => {
     return this.state.projects.map(project => {
       return (
         <div key={project.id} className="project-container">
-          <h4 className="project-name">{project.name}</h4>
+          <h4
+            className={`${!this.state.input}-name project-name`}
+            onClick={this.changeState}>
+            {project.name}
+          </h4>
+          <input 
+            className={`${this.state.input}-input`}
+            type="text"
+            onChange={this.handleChange}
+            onKeyUp={(e, id) => this.updateProjectName(e, project.id)}
+            placeholder={project.name}
+          />
           <button onClick={id => this.deleteProject(project.id)} id={project.id} className="delete-project-btn">X</button>
           <Palettes projectId={project.id} />
         </div>

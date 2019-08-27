@@ -31,3 +31,7 @@
   background: rgba(185, 22, 22, 0.692);
   color: white;
 }
+
+.false-pal-input, .false-pal-name {
+  display: none;
+}

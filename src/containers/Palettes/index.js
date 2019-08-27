@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import './Palettes.css';
 import { connect } from 'react-redux';
 import { openPaletteGenerator } from '../../actions';
-import { fetchPalettes, fetchDeletePalette } from '../../api/apiCalls';
+import { fetchPalettes, fetchDeletePalette, fetchPatchPalette } from '../../api/apiCalls';
 
 export class Palettes extends Component {
   constructor() {
     super();
     this.state = {
-      palettes: []
+      palettes: [],
+      name: '',
+      input: false
     }
   }
 
@@ -21,13 +23,42 @@ export class Palettes extends Component {
     }
   }
 
+  changeState = () => {
+    this.setState({ input: true });
+  }
+
+  handleChange = (e) => {
+    this.setState({ name: e.target.value })
+  }
+
+  updatePalette = (e, id) => {
+    let update = { name: this.state.name }
+    if (e.keyCode === 13) {
+      fetchPatchPalette(id, update);
+      let index = this.state.palettes.findIndex(palette => palette.id === id);
+      this.state.palettes[index].name = this.state.name;
+      this.setState({ input: false })
+    }
+  }
+
   displayPalettes =  () => {
     const { palettes } = this.state;
     if (typeof palettes !== 'string') {
       return palettes.map(pal => {
         return (
             <>
-              <h5 className="palette-name">{pal.name}</h5>
+              <h5 
+                className={`${!this.state.input}-pal-name palette-name`}
+                onClick={this.changeState}>
+                {pal.name}
+              </h5>
+              <input 
+                className={`${this.state.input}-pal-input`}
+                type="text"
+                onChange={this.handleChange}
+                onKeyUp={(e, id) => this.updatePalette(e, pal.id)}
+                placeholder={pal.name}
+              />
               <div className="palette-container" key={pal.id}>
                 <button 
                   className="delete-palette-btn" 
