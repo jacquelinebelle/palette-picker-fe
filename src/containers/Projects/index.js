@@ -40,10 +40,8 @@ export class Projects extends Component {
   deleteProject = (id) => {
     fetchDeleteProject(id);
     let index = this.state.projects.findIndex(project => project.id === id);
-    console.log(index)
     this.state.projects.splice(index, 1)
     this.setState({ projects: this.state.projects });
-    console.log(this.state.projects)
   }
 
   render() {

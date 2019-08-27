@@ -78,3 +78,18 @@ export const fetchAddProject = projectName => {
       
     }).then(data =>  data.palette)
   }
+
+  export const fetchPatchProject = (id, body) => {
+      return  fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/${id}`, {
+          method: 'PATCH',
+          headers: {'Content-type' : 'application/json'},
+          body: JSON.stringify({body})
+      })
+      .then(res => {
+        if (res.ok) {
+         return res.json()
+        } else {
+          throw new Error('Cannot modify project')
+        }
+      }).then(data =>  data.project)
+    }
