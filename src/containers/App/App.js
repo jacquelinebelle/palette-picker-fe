@@ -45,7 +45,6 @@ export class App extends Component {
   }
 
   getPalettes = id => {
-    // this.setState({currentProject: id})
     this.props.handleProjectSelected(id)
     this.handleFetchPalettes(id)
   }
