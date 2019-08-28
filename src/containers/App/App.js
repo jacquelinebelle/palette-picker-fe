@@ -6,7 +6,7 @@ import { fetchProjects, fetchAddPalette, fetchPalettes, fetchUpdatePalette } fro
 import Projects from '../Projects/Projects';
 import Palettes from '../Palettes/Palettes';
 import { connect } from 'react-redux';
-import './App.scss';
+import './App.css';
 import {projectSelected, setPalettes } from '../../actions';
 
 export class App extends Component {

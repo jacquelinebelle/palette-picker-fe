@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { fetchAddProject } from '../../api/apiCalls';
-import './ProjectForm.scss';
+import './ProjectForm.css';
 
 export class ProjectForm extends Component {
     constructor() {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setGeneratedColors, openPaletteGenerator } from '../../actions';
-import './PaletteGenerator.scss';
+import './PaletteGenerator.css';
 var ColorScheme = require('color-scheme');
 
 export class PaletteGenerator extends Component {
