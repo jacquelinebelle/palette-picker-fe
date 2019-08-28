@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProjectForm from '../ProjectForm';
 import { setGeneratedColors, openPaletteGenerator } from '../../actions';
-import './PaletteGenerator.scss';
 import generate from '../../assets/generate.svg'
+import lock from '../../assets/lock.svg'
+import './PaletteGenerator.scss';
 var ColorScheme = require('color-scheme');
 
 export class PaletteGenerator extends Component {
@@ -15,7 +16,7 @@ export class PaletteGenerator extends Component {
             color_3: '',
             color_4: '',
             color_5: '',
-            paletteName: ''
+            paletteName: '',
         }
     }
 
@@ -33,8 +34,11 @@ export class PaletteGenerator extends Component {
         var colors = scheme.colors();
         var palette = colors.map(color => '#' + color).slice(10, 15);
 
-        this.setState({ color_1: palette[0], color_2: palette[1], color_3: palette[2], color_4: palette[3], color_5: palette[4] });
-        this.props.handleSetGeneratedColors(palette);
+        Object.keys(this.state).forEach((key, index) => {
+            if (key !== 'paletteName' && this.state[key][0] !== 'l') {
+                this.setState({ [key]: palette[index] })
+            }
+        })
     }
 
     togglePaletteGenerator = () => {
@@ -57,14 +61,64 @@ export class PaletteGenerator extends Component {
         this.setState({paletteName: ""})
     }
 
+    lockColor = (e, num, color) => {
+        let lockedColor = `color_${num}`
+        if (e.target.className === 'locked') {
+            e.target.className = "lock"
+            let unlocked = this.state[lockedColor].split('-')[1]
+            this.state[lockedColor] = unlocked;
+        } else {
+            e.target.className = "locked"
+            let lockedState = `locked-${this.state[lockedColor]}`
+            this.state[lockedColor] = lockedState;
+        }
+    }
+
     render() {
+        const { color_1, color_2, color_3, color_4, color_5} = this.state;
         return (
             <article className={`${this.props.select}-container container`}>
-                <section className="color color-1" style={{background: this.state.color_1}} />
-                <section className="color color-2" style={{background: this.state.color_2}}/>
-                <section className="color color-3" style={{background: this.state.color_3}}/>
-                <section className="color color-4" style={{background: this.state.color_4}}/>
-                <section className="color color-5" style={{background: this.state.color_5}}/>
+                <section className="color color-1" style={{background: color_1}}>
+                    <button 
+                        className={`freeze-color`}
+
+                        style={{background: color_1}}
+                        onClick={(e, num, color) => this.lockColor(e, 1, color_1)}>
+                        <img className="lock" src={lock} />
+                    </button>
+                </section>
+                <section className="color color-2" style={{background: color_2}}>
+                    <button 
+                        className="freeze-color" 
+                        style={{background: color_2}}
+                        onClick={(e, num, color) => this.lockColor(e, 2, color_2)}>
+                        <img className="lock" src={lock} />
+                    </button>
+                </section>
+                <section className="color color-3" style={{background: color_3}}>
+                    <button 
+                        className="freeze-color" 
+                        style={{background: color_3}}
+                        onClick={(e, num, color) => this.lockColor(e, 3, color_3)}>
+                        <img className="lock" src={lock} />
+                    </button>
+                </section>
+                <section className="color color-4" style={{background: color_4}}>
+                    <button 
+                        className="freeze-color" 
+                        style={{background: color_4}}
+                        onClick={(e, num, color) => this.lockColor(e, 4, color_4)}>
+                        <img className="lock" src={lock} />
+                    </button>
+                </section>
+                <section className="color color-5" style={{background: color_5}}>
+                    <button 
+                        className="freeze-color" 
+                        style={{background: color_5}}
+                        onClick={(e, num, color) => this.lockColor(e, 5, color_5)}>
+                        <img className="lock" src={lock} />
+                    </button>
+                </section>
                 <ProjectForm />
                 <button className="generate-btn"
                     onClick={this.generatePalette}>

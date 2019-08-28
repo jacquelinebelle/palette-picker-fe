@@ -53,6 +53,19 @@
     right: 0;
 }
 
+.color:hover {
+    .freeze-color {
+        border: none;
+        visibility: visible;
+        opacity: 0.5;
+    }
+    .freeze-color:hover {
+        cursor: pointer;
+        // height: 100px;
+        opacity: 1;
+    }
+}
+
 .generate-btn {
     bottom: 31px;
     border: none;
@@ -89,5 +102,26 @@
     right: 48px;
     width: 58px;
    
+}
+
+.freeze-color {
+    bottom: 65px;
+    height: 35px;
+    left: 25px;
+    position: absolute;
+    visibility: hidden;
+}
+
+.lock {
+    height: 35px;
+}
+
+.locked {
+    left: -3px;
+    bottom: -1px;
+    height: 36px;
+    position: absolute;
+    opacity: 1;
+    visibility: visible;
 }
 
