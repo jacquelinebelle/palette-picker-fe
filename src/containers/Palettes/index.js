@@ -16,6 +16,7 @@ export class Palettes extends Component {
   }
 
   componentDidMount = async () => {
+    console.log(this.props.projectId)
     const palettes = await fetchPalettes(this.props.projectId)
     if (typeof palettes === 'string') {
       this.setState({ palettes: '404' })

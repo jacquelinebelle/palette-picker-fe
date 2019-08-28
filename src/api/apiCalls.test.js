@@ -57,7 +57,7 @@ describe('apiCalls', () => {
             ok: false,
           })
         })
-        expect(fetchProject()).rejects.toEqual(Error('Cannot fetch projects'))
+        expect(fetchProject()).rejects.toEqual(Error('Cannot fetch project'))
       })
     });
 

@@ -82,14 +82,16 @@ export class App extends Component {
 }
 
 
-export const mapStateToProps = (state) => ({
-  colors: state.colors,
-  selectedProject: state.selectedProject
-});
+// export const mapStateToProps = (state) => ({
+//   colors: state.colors,
+//   selectedProject: state.selectedProject
+// });
 
-export const mapDispatchToProps = dispatch => ({
-  // setProjects: projects => dispatch(setProjects(projects)),
+// export const mapDispatchToProps = dispatch => ({
+//   // setProjects: projects => dispatch(setProjects(projects)),
 
-}) 
+// }) 
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+// export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+export default App;

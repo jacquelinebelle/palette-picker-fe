@@ -2,7 +2,7 @@ export const fetchProjects = async () => {
   try {
     const response = await fetch('https://palette-picker-backend.herokuapp.com/api/v1/projects')
     const projects = await response.json();
-    if (response.ok) {
+    if (response.status === 404 || response.ok) {
       return projects.projects
     } else {
       throw new Error('Cannot fetch projects')
@@ -16,7 +16,7 @@ export const fetchPalettes = async id => {
   try {
     const response = await fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/${id}/palettes`)
     const palettes = await response.json();
-    if (response.ok) {
+    if (response.status === 404 || response.ok) {
       return palettes.palettes
     } else {
       throw new Error('Cannot fetch palettes')

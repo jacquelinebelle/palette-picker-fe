@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Nav.scss';
 
-const Nav = () => {
+export const Nav = () => {
 
     return (
         <header className="nav-bar">
