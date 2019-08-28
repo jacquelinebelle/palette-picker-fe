@@ -58,7 +58,6 @@ class ProjectForm extends Component {
             color_4: colors[3],
             color_5: colors[4]
         }
-
         await fetchAddPalette(id, palette);
         this.setState({ select: false });
         this.props.flipSelect(false);

@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Background from '../../components/Background';
 import PaletteGenerator from '../PaletteGenerator';
-import { setProjects } from '../../actions';
+// import { setProjects } from '../../actions';
 import Projects from '../Projects';
 import Nav from '../../components/Nav';
-import { fetchProjects } from '../../api/apiCalls';
-import Palettes from '../Palettes';
+// import { fetchProjects } from '../../api/apiCalls';
+// import Palettes from '../Palettes';
 import Project from '../Project'
+import NotFound from '../../components/NotFound/';
 import { connect } from 'react-redux';
 import './App.scss';
-import {projectSelected, setPalettes } from '../../actions';
+// import {projectSelected, setPalettes } from '../../actions';
 
 export class App extends Component {
   constructor() {
@@ -66,6 +67,7 @@ export class App extends Component {
         <Nav />
         <Switch>
           <Route exact path='/' render={() => <PaletteGenerator />} />
+          <Route exact path='/404' render={() => <NotFound />} />
           <Route exact path='/projects' render={() => <Projects />} />
           <Route exact path={`/projects/:id/palettes`} render={(id) => <Project id={id.location.pathname} />} />
           <Route exact path={`/projects/palettes/:id`} render={(id) => <PaletteGenerator id={id.location.pathname} />} />
@@ -82,16 +84,16 @@ export class App extends Component {
 }
 
 
-// export const mapStateToProps = (state) => ({
-//   colors: state.colors,
-//   selectedProject: state.selectedProject
-// });
+export const mapStateToProps = (state) => ({
+  colors: state.colors,
+  selectedProject: state.selectedProject
+});
 
 // export const mapDispatchToProps = dispatch => ({
 //   // setProjects: projects => dispatch(setProjects(projects)),
 
 // }) 
 
-// export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);
 
-export default App;
+// export default App;

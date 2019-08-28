@@ -40,9 +40,13 @@ export const fetchPalette = async (id) => {
   try {
     const response = await fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/palettes/${id}`)
     const palette = await response.json();
-    return palette;
+    if (response.status === 404 || response.ok) {
+      return palette;
+    } else {
+      throw new Error('Cannot fetch palettes')
+    }
   } catch (error) {
-    console.log(error)
+    throw new Error('Cannot fetch palette');
   }      
 }
 

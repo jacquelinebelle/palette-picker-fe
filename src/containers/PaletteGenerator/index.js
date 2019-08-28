@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import ProjectForm from '../ProjectForm';
 import { setGeneratedColors } from '../../actions';
 import { fetchPalette } from '../../api/apiCalls';
+import { Redirect } from 'react-router';
 import generate from '../../assets/generate.svg'
 import lock from '../../assets/lock.svg'
 import './PaletteGenerator.scss';
@@ -17,21 +18,10 @@ export class PaletteGenerator extends Component {
             color_3: '',
             color_4: '',
             color_5: '',
-            name: ''
+            name: '',
+            error: false
         }
     }
-
-    
-// /color_1: "#ffcccc"
-// color_2: "#cc3333"
-// color_3: "#66cc66"
-// color_4: "#339933"
-// color_5: "#ccffcc"
-// created_at: "2019-08-28T01:02:48.244Z"
-// id: 21
-// name: "watermelon"
-// project_id: 15
-// updated_at: "2019-08-28T01:02:48.244Z"
 
     async componentDidMount() {
         if (this.props.id === undefined) {
@@ -39,16 +29,14 @@ export class PaletteGenerator extends Component {
         } else {
             const id = this.props.id.split('/')[3]
             const palette = await fetchPalette(id);
-            this.getSpecifiedPalette(palette[0]);
+            palette.name === undefined ? 
+            this.state.error = true 
+            : this.getSpecifiedPalette(palette[0]);
             
         }
     }
     
     getSpecifiedPalette = (palette) => {
-        // objectkeys? foreach
-        // if typeof key[7] === number || === 'name
-        // setstate key: state[key]
-        // uncomment out call in cdm
         Object.keys(palette).forEach(key => {
             if (key.length === 7 || key === 'name' ) {
                 this.setState({ [key]: palette[key] })
@@ -113,6 +101,7 @@ export class PaletteGenerator extends Component {
         const { color_1, color_2, color_3, color_4, color_5} = this.state;
         return (
             <article className={`${this.props.select}-container container`}>
+            {this.state.error && <Redirect to='/404'/>}
                 <section className="color color-1" style={{background: color_1}}>
                     <button 
                         className={`freeze-color`}
