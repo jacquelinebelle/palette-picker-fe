@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import './Projects.css';
 import ProjectForm from '../ProjectForm';
 import Palettes from '../Palettes';
@@ -47,7 +48,8 @@ export class Projects extends Component {
   displayProjects = () => {
     return this.state.projects.map(project => {
       return (
-        <div key={project.id} className="project-container">
+        <Link className="proj-link" exact to={`/projects/${project.id}/palettes`} key={project.id}>
+        <div className="project-container">
           <h4
             className={`${!this.state.input}-name project-name`}
             onClick={this.changeState}>
@@ -63,6 +65,7 @@ export class Projects extends Component {
           <button onClick={id => this.deleteProject(project.id)} id={project.id} className="delete-project-btn">X</button>
           <Palettes projectId={project.id} />
         </div>
+        </Link>
       )
       
     })

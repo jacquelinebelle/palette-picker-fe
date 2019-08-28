@@ -47,7 +47,8 @@ export class Palettes extends Component {
     if (typeof palettes !== 'string') {
       return palettes.map(pal => {
         return (
-            <Link className="pal-link" exact to={`/projects/${pal.id}/palettes`}>
+        
+            <Link className="pal-link" exact to={`/projects/palettes/${pal.id}`} key={pal.id}>
               <h5 
                 className={`${!this.state.input}-pal-name palette-name`}
                 onClick={this.changeState}>
@@ -60,7 +61,7 @@ export class Palettes extends Component {
                 onKeyUp={(e, id) => this.updatePalette(e, pal.id)}
                 placeholder={pal.name}
               />
-              <div className="palette-container" key={pal.id}>
+              <div className="palette-container">
                 <button 
                   className="delete-palette-btn" 
                   onClick={id => this.deletePalette(pal.id)}>

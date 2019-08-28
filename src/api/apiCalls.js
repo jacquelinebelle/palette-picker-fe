@@ -2,10 +2,28 @@ export const fetchProjects = async () => {
   try {
     const response = await fetch('https://palette-picker-backend.herokuapp.com/api/v1/projects')
     const projects = await response.json();
-    return projects.projects
+    if (response.ok) {
+      return projects.projects
+    } else {
+      throw new Error('Cannot fetch projects')
+    }
   } catch (error) {
-    console.log(error)
+    throw new Error('Cannot fetch projects')
   }      
+}
+
+export const fetchPalettes = async id => {
+  try {
+    const response = await fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/${id}/palettes`)
+    const palettes = await response.json();
+    if (response.ok) {
+      return palettes.palettes
+    } else {
+      throw new Error('Cannot fetch palettes')
+    }
+  } catch (error) {
+    throw new Error('Cannot fetch palettes')
+  }   
 }
 
 export const fetchProject = async (id) => {
@@ -14,12 +32,21 @@ export const fetchProject = async (id) => {
     const project = await response.json();
     return project.project[0];
   } catch (error) {
+    throw new Error('Cannot fetch project')
+  }      
+}
+
+export const fetchPalette = async (id) => {
+  try {
+    const response = await fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/palettes/${id}`)
+    const palette = await response.json();
+    return palette;
+  } catch (error) {
     console.log(error)
   }      
 }
 
 export const fetchAddProject = projectName => {
-  console.log('bb')
     return  fetch('https://palette-picker-backend.herokuapp.com/api/v1/projects', {
         method: 'POST',
         headers: {'Content-type' : 'application/json'},
@@ -34,31 +61,6 @@ export const fetchAddProject = projectName => {
     }).then(data =>  data.project)
   }
 
-  export const fetchDeleteProject = id => {
-    return  fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/${id}`, {
-        method: 'DELETE'
-    })
-    .then(res => {
-      if (res.ok) {
-       return res.json()
-      } else {
-        throw new Error('Cannot delete project')
-      }
-    }).then(data =>  data.project)
-  }
-
-  export const fetchPalettes = async id => {
-    try {
-      const response = await fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/${id}/palettes`)
-      if (!response.ok) {
-        return '404'
-      }
-      const palettes = await response.json();
-      return palettes.palettes;
-    } catch (error) {
-      return 'no palettes here';
-    }
-  }
 
   export const fetchAddPalette = (id, newPalette) => {
     return  fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/${id}`, {
@@ -73,6 +75,19 @@ export const fetchAddProject = projectName => {
         throw new Error('Cannot add palette')
       }
     }).then(data =>  data.palette)
+  }
+
+  export const fetchDeleteProject = id => {
+    return  fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/${id}`, {
+        method: 'DELETE'
+    })
+    .then(res => {
+      if (res.ok) {
+       return res.json()
+      } else {
+        throw new Error('Cannot delete project')
+      }
+    }).then(data =>  data.project)
   }
 
   export const fetchDeletePalette = id => {
@@ -90,18 +105,23 @@ export const fetchAddProject = projectName => {
   }
 
 export const fetchPatchProject = async (id, body) => {
-    try {
-        const response = await fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/${id}`, {
-          method: 'PATCH',
-          headers: {'Content-type' : 'application/json'},
-          body: JSON.stringify(body)
-      })
-        const result = await response.json();
+  try {
+      const response = await fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/${id}`, {
+        method: 'PATCH',
+        headers: {'Content-type' : 'application/json'},
+        body: JSON.stringify(body)
+    })
+      const result = await response.json();
+      if (response.ok) {
         return result;
-    } catch(error) {
-      console.log(error)
-    }
+      } else {
+        throw new Error('Cannot modify project')
+      }
+    } catch (error) {
+      throw new Error('Cannot modify project')
+    }      
   }
+  
 
 export const fetchPatchPalette = async (id, body) => {
   try {
@@ -110,9 +130,13 @@ export const fetchPatchPalette = async (id, body) => {
         headers: {'Content-type' : 'application/json'},
         body: JSON.stringify(body)
     })
-      const result = await response.json();
+    const result = await response.json();
+    if (response.ok) {
       return result;
-  } catch(error) {
-    console.log(error)
-  }
+    } else {
+      throw new Error('Cannot modify palette')
+    }
+  } catch (error) {
+    throw new Error('Cannot modify palette')
+  }    
 }

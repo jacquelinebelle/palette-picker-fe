@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProjectForm from '../ProjectForm';
-import { setGeneratedColors, openPaletteGenerator } from '../../actions';
+import { setGeneratedColors } from '../../actions';
+import { fetchPalette } from '../../api/apiCalls';
 import generate from '../../assets/generate.svg'
 import lock from '../../assets/lock.svg'
 import './PaletteGenerator.scss';
@@ -16,12 +17,44 @@ export class PaletteGenerator extends Component {
             color_3: '',
             color_4: '',
             color_5: '',
-            paletteName: '',
+            name: ''
         }
     }
 
-    componentDidMount() {
-        this.generatePalette();
+    
+// /color_1: "#ffcccc"
+// color_2: "#cc3333"
+// color_3: "#66cc66"
+// color_4: "#339933"
+// color_5: "#ccffcc"
+// created_at: "2019-08-28T01:02:48.244Z"
+// id: 21
+// name: "watermelon"
+// project_id: 15
+// updated_at: "2019-08-28T01:02:48.244Z"
+
+    async componentDidMount() {
+        if (this.props.id === undefined) {
+            this.generatePalette();
+        } else {
+            const id = this.props.id.split('/')[3]
+            const palette = await fetchPalette(id);
+            this.getSpecifiedPalette(palette[0]);
+            
+        }
+    }
+    
+    getSpecifiedPalette = (palette) => {
+        // objectkeys? foreach
+        // if typeof key[7] === number || === 'name
+        // setstate key: state[key]
+        // uncomment out call in cdm
+        Object.keys(palette).forEach(key => {
+            if (key.length === 7 || key === 'name' ) {
+                this.setState({ [key]: palette[key] })
+            }
+        })
+
     }
 
     generatePalette = () => {
@@ -35,7 +68,7 @@ export class PaletteGenerator extends Component {
         var palette = colors.map(color => '#' + color).slice(10, 15);
 
         Object.keys(this.state).forEach((key, index) => {
-            if (key !== 'paletteName' && this.state[key][0] !== 'l') {
+            if (key !== 'name' && this.state[key][0] !== 'l') {
                 this.setState({ [key]: palette[index] })
             }
         })
@@ -48,19 +81,19 @@ export class PaletteGenerator extends Component {
       }
 
     handleOnChange = e => {
-        this.setState({paletteName: e.target.value});
+        this.setState({name: e.target.value});
         
     }
 
     submitNewPalette = () => {
-        const { paletteName } = this.state
-        this.props.addPalette(paletteName)
+        const { name } = this.state
+        this.props.addPalette(name)
         this.props.handleOpenPaletteGenerator()
         this.clearInput()
     }
 
     clearInput = () => {
-        this.setState({paletteName: ""})
+        this.setState({name: ""})
     }
 
     lockColor = (e, num, color) => {

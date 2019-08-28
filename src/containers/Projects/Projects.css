@@ -90,3 +90,9 @@
 .false-input, .false-name {
   display: none;
 }
+
+.proj-link {
+  color: #626262;
+  text-decoration: none;
+  
+}

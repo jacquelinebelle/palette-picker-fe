@@ -1,4 +1,4 @@
-import { fetchProjects, fetchAddProject, fetchDeleteProject, fetchPalettes, fetchAddPalette} from '../api/apiCalls';
+import { fetchProjects, fetchPalettes, fetchProject, fetchPalette, fetchAddProject, fetchAddPalette, fetchDeleteProject, fetchDeletePalette, fetchPatchProject, fetchPatchPalette} from '../api/apiCalls';
 
 
 describe('apiCalls', () => {
@@ -19,19 +19,47 @@ describe('apiCalls', () => {
     
       it('fetchProjects should return a parsed response if status is ok', async () =>{
         const result = await fetchProjects();
-        fetchProjects()
         expect(result).toEqual(mockProject.projects)
       })
   
       it('fetchProjects should return error if status is not ok', async () => {
         window.fetch = jest.fn().mockImplementationOnce(() => {
-          return Promise.resolve( {
+          return Promise.resolve({
             ok: false,
           })
         })
-        await expect(fetchProjects()).rejects.toEqual(Error('Cannot fetch projects'))
+        expect(fetchProjects()).rejects.toEqual(Error('Cannot fetch projects'))
       })
-    })
+    });
+
+    describe('fetchProject', () => {
+      let mockProject
+      beforeEach( () => {
+        mockProject = {id: 1, name: 'project'};
+    
+        window.fetch = jest.fn().mockImplementation(() => {
+          return Promise.resolve( {
+            ok: true,
+            json: () => Promise.resolve(mockProject)
+          })
+        })
+      });
+    
+      it('fetchProject should be called with the correct URL', async () =>{
+        const expected = 'https://palette-picker-backend.herokuapp.com/api/v1/projects/1';
+        fetchProject(1);
+        expect(window.fetch).toHaveBeenCalledWith(expected)
+      })
+  
+      it('fetchProject should return error if status is not ok', async () => {
+        window.fetch = jest.fn().mockImplementationOnce(() => {
+          return Promise.resolve({
+            ok: false,
+          })
+        })
+        expect(fetchProject()).rejects.toEqual(Error('Cannot fetch projects'))
+      })
+    });
 
     describe('fetchAddProject', () => {
       let mockPalette
@@ -120,9 +148,38 @@ describe('apiCalls', () => {
             ok: false,
           })
         })
-        await expect(fetchPalettes()).resolves.toEqual('Cannot fetch palettes')
+        await expect(fetchPalettes()).rejects.toEqual(Error('Cannot fetch palettes'))
       })
     })
+
+    describe('fetchPalette', () => {
+      let mockPalette
+      beforeEach( () => {
+    
+        mockPalette = {name: 'palette'};
+    
+        window.fetch = jest.fn().mockImplementation(() => {
+          return Promise.resolve( {
+            ok: true,
+            json: () => Promise.resolve(mockPalette)
+          })
+        })
+      });
+    
+      it('fetchPalette should return a parsed response if status is ok', async () =>{
+        const result = await fetchPalette();
+        expect(result).toEqual(mockPalette)
+      })
+  
+      it('fetchPalette should return error if status is not ok', async () => {
+        window.fetch = jest.fn().mockImplementationOnce(() => {
+          return Promise.resolve({
+            ok: false,
+          })
+        })
+        expect(fetchPalette()).rejects.toEqual(Error('Cannot fetch palettes'))
+      })
+    });
 
 
     describe('fetchAddPalette', () => {
@@ -152,6 +209,64 @@ describe('apiCalls', () => {
           })
         })
         await expect(fetchAddPalette()).rejects.toEqual(Error('Cannot add palette'))
+      })
+    })
+
+    describe('fetchPatchProject', () => {
+      let updatedProject;
+
+      beforeEach( () => {
+        updatedProject = {name: 'beep'};
+        window.fetch = jest.fn().mockImplementation(() => {
+          return Promise.resolve( {
+            ok: true,
+            json: () => Promise.resolve(updatedProject)
+          })
+        })
+      });
+    
+      it('fetchPatchProject should return a parsed response if status is ok', async () =>{
+        const result = await fetchPatchProject();
+        fetchPatchProject()
+        expect(result).toEqual(updatedProject)
+      })
+  
+      it('fetchPatchProject should return error if status is not ok', async () => {
+        window.fetch = jest.fn().mockImplementationOnce(() => {
+          return Promise.resolve( {
+            ok: false,
+          })
+        })
+        await expect(fetchPatchProject()).rejects.toEqual(Error('Cannot modify project'))
+      })
+    });
+
+    describe('fetchPatchPalette', () => {
+      let updatedPalette;
+
+      beforeEach( () => {
+        updatedPalette = {name: 'beep'};
+        window.fetch = jest.fn().mockImplementation(() => {
+          return Promise.resolve( {
+            ok: true,
+            json: () => Promise.resolve(updatedPalette)
+          })
+        })
+      });
+    
+      it('fetchPatchPalette should return a parsed response if status is ok', async () =>{
+        const result = await fetchPatchPalette();
+        fetchPatchPalette()
+        expect(result).toEqual(updatedPalette)
+      })
+  
+      it('fetchPatchPalette should return error if status is not ok', async () => {
+        window.fetch = jest.fn().mockImplementationOnce(() => {
+          return Promise.resolve( {
+            ok: false,
+          })
+        })
+        await expect(fetchPatchPalette()).rejects.toEqual(Error('Cannot modify palette'))
       })
     })
 })

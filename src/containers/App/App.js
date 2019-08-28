@@ -67,8 +67,9 @@ export class App extends Component {
         <Switch>
           <Route exact path='/' render={() => <PaletteGenerator />} />
           <Route exact path='/projects' render={() => <Projects />} />
+          <Route exact path={`/projects/:id/palettes`} render={(id) => <Project id={id.location.pathname} />} />
+          <Route exact path={`/projects/palettes/:id`} render={(id) => <PaletteGenerator id={id.location.pathname} />} />
         </Switch>
-        <Route exact path={`/projects/:id/palettes`} render={(id) => <Project id={id.location.pathname} />} />
         <Background 
           color_1={colors[0]}
           color_2={colors[1]}

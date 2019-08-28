@@ -71,8 +71,10 @@ class ProjectForm extends Component {
     }
 
     clearInput = (e) => {
-        e.target.value = '';
-        e.target.parentNode.firstChild.value = '';
+        if (e !== undefined) {
+            e.target.value = '';
+            e.target.parentNode.firstChild.value = '';
+        }
     }
 
     getProjectOptions = () => {
