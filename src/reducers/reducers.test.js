@@ -25,13 +25,14 @@ describe('Reducers', () => {
   describe('openPaletteGeneratorReducer', () => {
     it('should return state as default', () => {
       const result = openPaletteGeneratorReducer(undefined, []);
-      expect(result).toEqual(false);
+      const expected = {open: false, paletteUpdatingId: 0, paletteUpdatingName: "", type: "Add"}
+      expect(result).toEqual(expected);
     });
 
     it('should toggle openPaletteGen', () => {
       const action = openPaletteGenerator();
       const result = openPaletteGeneratorReducer(false, action);
-      const expected = true
+      const expected = {"open": true, "paletteUpdatingId": undefined, "paletteUpdatingName": undefined, "type": undefined}
       expect(result).toEqual(expected);
     });
   });

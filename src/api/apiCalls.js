@@ -79,8 +79,26 @@ export const fetchAddProject = projectName => {
     }).then(data =>  data.palette)
   }
 
+  export const fetchUpdateProject = (id, updatedProject) => {
+
+    return  fetch(`http://localhost:3001/api/v1/projects/${id}`, {
+        method: 'PATCH',
+        headers: {'Content-type' : 'application/json'},
+        body: JSON.stringify({ ...updatedProject})
+    })
+    .then(res => {
+      if (res.ok) {
+       return res.json()
+      } else {
+        throw new Error('Cannot update project')
+      }
+      
+    }).then(data =>  data.project)
+  }
+
+
   export const fetchUpdatePalette = (id, updatedPalette) => {
-    console.log(id)
+
     return  fetch(`http://localhost:3001/api/v1/projects/palettes/${id}`, {
         method: 'PATCH',
         headers: {'Content-type' : 'application/json'},
@@ -90,7 +108,7 @@ export const fetchAddProject = projectName => {
       if (res.ok) {
        return res.json()
       } else {
-        throw new Error('Cannot delete palette')
+        throw new Error('Cannot update palette')
       }
       
     }).then(data =>  data.palette)

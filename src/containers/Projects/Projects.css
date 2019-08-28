@@ -50,6 +50,7 @@
   height: 100%;
   display: flex;
   align-items: center;
+  outline: none;
 }
 
 .project-name:hover {
@@ -69,4 +70,17 @@
 
 .delete-project-btn:hover {
   background: rgba(255, 0, 0, 0.466);
+}
+
+.update-project-form {
+  position: absolute;
+  width: 90%;
+  border: 1px soid red;
+  display: flex;
+  flex-direction: column;
+  left: 13px;
+  height: 95%;
+  background: rgba(0, 0, 0, 0.904);
+  border-radius: 10px;
+  padding: 40% 10px 0 10px;
 }

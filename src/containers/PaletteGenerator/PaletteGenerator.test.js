@@ -12,7 +12,8 @@ describe('PaletteGenerator', () => {
      props = {
       handleSetGeneratedColors: jest.fn(),
       handleOpenPaletteGenerator: jest.fn(),
-      addAndUpdatePalette: jest.fn()
+      addAndUpdatePalette: jest.fn(),
+      openPaletteGen: false,
     }
   wrapper = shallow(<PaletteGenerator {...props}/>);
   })

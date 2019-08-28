@@ -11,6 +11,7 @@ describe('Palettes', () => {
   beforeEach(() => {
      props = {
       handleOpenPaletteGenerator: jest.fn(),
+      openPaletteGen: false,
     }
     palettes = [{name: 'palette'}]
     wrapper = shallow(<Palettes palettes={palettes} {...props}/>);
@@ -20,10 +21,25 @@ describe('Palettes', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
-  it('togglePaletteGenerator should call handleOpenPaletteGenerator', () => {
-    wrapper.instance().togglePaletteGenerator();
+  it('togglePaletteGenerator should call handleOpenPaletteGenerator', async () => {
+
+    await  wrapper.find('.edit-palette-btn').simulate('click', {
+      target: {name: 'Update', parentElement: {id: 1}}
+    })
+
     expect(props.handleOpenPaletteGenerator).toHaveBeenCalledTimes(1)
-  });
+  })
+
+  it.skip('handleDeletePalette should call fetchDeletePalette', async () => {
+
+    wrapper.instance().fetchDeletePalette = jest.fn()
+
+    await  wrapper.find('.delete-palette-btn').simulate('click', {
+      target: {id: 2, parentElement: {id: 1}}
+    })
+
+    expect(wrapper.instance().fetchDeletePalette()).toHaveBeenCalledTimes(1)
+  })
 
   it('should return selected project', () => {
     const mockState = {

@@ -8,7 +8,6 @@ export class Palettes extends Component {
 
   togglePaletteGenerator = e => {
     const paletteName = e.target.id
-
     const paletteActionType = e.target.name;
     const id = parseInt(e.target.parentElement.id)
     this.props.handleOpenPaletteGenerator(paletteActionType, id, paletteName)
@@ -33,18 +32,14 @@ export class Palettes extends Component {
           return (
             <div key={i} id={palette.id} className="palette-container">
               <button onClick={this.handleDeletePalette} className="delete-palette-btn" id={palette.project_id}>&#xd7;</button>
-              <button onClick={this.togglePaletteGenerator} name="Update" className="edit-palette-btn" id={palette.name}>
-                {/* <p className="dot"></p>
-                <p className="dot"></p>
-                <p className="dot"></p> */}
-              </button>
+              <button onClick={this.togglePaletteGenerator} name="Update" className="edit-palette-btn" id={palette.name}></button>
               <h4 className="palette-name" >{palette.name}</h4>
               <section className="pal-colors-container">
-                <section className="pal-color pal-color-1" style={{background: palette.color_1}} />
-                <section className="pal-color pal-color-2" style={{background: palette.color_2}}/>
-                <section className="pal-color pal-color-3" style={{background: palette.color_3}}/>
-                <section className="pal-color pal-color-4" style={{background: palette.color_4}}/>
-                <section className="pal-color pal-color-5" style={{background: palette.color_5}}/>
+                <section className="pal-color pal-color-1" style={{background: palette.color_1}} >{palette.color_1}</section>
+                <section className="pal-color pal-color-2" style={{background: palette.color_2}}>{palette.color_2}</section>
+                <section className="pal-color pal-color-3" style={{background: palette.color_3}}>{palette.color_3}</section>
+                <section className="pal-color pal-color-4" style={{background: palette.color_4}}>{palette.color_4}</section>
+                <section className="pal-color pal-color-5" style={{background: palette.color_5}}>{palette.color_5}</section>
             </section>
             </div>
           )
