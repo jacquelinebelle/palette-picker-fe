@@ -120,3 +120,18 @@
 .edit-palette-btn:hover .dot {
   background: #fff;
 }
+
+.no-palletes {
+  font-family: Arial, Helvetica, sans-serif;
+  background: lightgray;
+  border-radius: 5px;
+  padding: 7px;
+  color: rgb(110, 110, 110);
+}
+
+.update-project-name-title {
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 33px;
+  text-align: center;
+  color: #fff;
+}

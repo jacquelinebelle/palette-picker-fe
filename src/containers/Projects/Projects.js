@@ -72,6 +72,7 @@ export class Projects extends Component {
         <ProjectForm getUpdatedProject={this.props.getUpdatedProject}/> 
         </div>
         {this.state.updateProjectOpen && <form className="update-project-form">
+        <h5 className="update-project-name-title">Update Project Name</h5>
           <input type="text" className="updated-name-input" defaultValue={this.state.defaultName} maxLength="30" onChange={this.handleChange}/>
           <div className="updat-project-btn-container">
             <button className="update-project-btn" onClick={this.handleUpdateProject}>Update</button>

@@ -75,12 +75,11 @@
 .update-project-form {
   position: absolute;
   width: 90%;
-  border: 1px soid red;
   display: flex;
   flex-direction: column;
   left: 13px;
   height: 95%;
-  background: rgba(0, 0, 0, 0.904);
+  background: rgba(44, 56, 95, 0.904);
   border-radius: 10px;
   padding: 40% 10px 0 10px;
 }
@@ -101,7 +100,7 @@
 
 .update-project-btn {
   margin-top: 20px;
-  height: 31px;
+  height: 30px;
   border-radius: 5px;
   cursor: pointer;
   outline: none;

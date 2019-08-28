@@ -25,7 +25,7 @@ export class Palettes extends Component {
   generatePalettes = () => {
     const { palettes } = this.props;
       if ((palettes[0]!== undefined && palettes[0].error) === 'No palettes under this project') {
-        return <p>No palettes found under this project</p>
+        return <p className="no-palletes">No palettes found under this project</p>
           
       } else {
         return palettes.map((palette, i) => {
