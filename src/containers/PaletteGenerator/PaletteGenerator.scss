@@ -125,3 +125,27 @@
     visibility: visible;
 }
 
+.specified-name {
+    bottom: 40px;
+    color: #626262;
+    font-size: 33px;
+    left: 40px;
+    margin: 0;
+    position: absolute;
+}
+
+.false-pal-input, .false-pal-name {
+    display: none;
+}
+
+.true-pal-input {
+    bottom: 36px;
+    cursor: pointer;
+    left: 33px;
+    padding-left: 8px;
+    color: #626262;
+    font-size: 34px;
+    position: absolute;
+    width: 250px;
+
+}

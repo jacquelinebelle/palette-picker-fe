@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ProjectForm from '../ProjectForm';
 import { setGeneratedColors } from '../../actions';
-import { fetchPalette } from '../../api/apiCalls';
+import { fetchPalette, fetchPatchPalette } from '../../api/apiCalls';
 import generate from '../../assets/generate.svg'
 import lock from '../../assets/lock.svg'
 import './PaletteGenerator.scss';
@@ -17,7 +17,9 @@ export class PaletteGenerator extends Component {
             color_3: '',
             color_4: '',
             color_5: '',
-            name: ''
+            name: '',
+            specified: false,
+            input: false
         }
     }
 
@@ -26,8 +28,9 @@ export class PaletteGenerator extends Component {
             this.generatePalette();
         } else {
             const id = this.props.id.split('/')[3]
+            this.state.id = parseInt(id);
             const palette = await fetchPalette(id);
-            palette.name === undefined ? 
+            palette[0].name === undefined ? 
             this.props.history.replace('/404')
             : this.getSpecifiedPalette(palette[0]);
             
@@ -35,8 +38,9 @@ export class PaletteGenerator extends Component {
     }
     
     getSpecifiedPalette = (palette) => {
+        this.state.specified = true;
         Object.keys(palette).forEach(key => {
-            if (key.length === 7 || key === 'name' ) {
+            if (key.length === 7 || key === ('name' || 'id')) {
                 this.setState({ [key]: palette[key] })
             }
         })
@@ -62,27 +66,27 @@ export class PaletteGenerator extends Component {
         this.props.setGeneratedColors(palette)
     }
 
-    togglePaletteGenerator = () => {
-        this.props.handleOpenPaletteGenerator()
-      }
+    // togglePaletteGenerator = () => {
+    //     this.props.handleOpenPaletteGenerator()
+    //   }
 
     handleOnChange = e => {
         this.setState({name: e.target.value});
         
     }
 
-    submitNewPalette = () => {
-        const { name } = this.state
-        this.props.addPalette(name)
-        this.props.handleOpenPaletteGenerator()
-        this.clearInput()
-    }
+    // submitNewPalette = () => {
+    //     const { name } = this.state
+    //     this.props.addPalette(name)
+    //     this.props.handleOpenPaletteGenerator()
+    //     this.clearInput()
+    // }
 
-    clearInput = () => {
-        this.setState({name: ""})
-    }
+    // clearInput = () => {
+    //     this.setState({name: ""})
+    // }
 
-    lockColor = (e, num, color) => {
+    lockColor = (e, num) => {
         let lockedColor = `color_${num}`
         if (e.target.className === 'locked') {
             let unlocked = this.state[lockedColor].split('-')[1]
@@ -95,8 +99,20 @@ export class PaletteGenerator extends Component {
         }
     }
 
+    changeState = () => {
+        this.setState({ input: !this.state.input });
+    }
+
+    updatePalette = (e, id) => {
+        let update = { name: this.state.name }
+        if (e.keyCode === 13) {
+          fetchPatchPalette(id, update);
+          this.changeState();
+        }
+      }
+
     render() {
-        const { color_1, color_2, color_3, color_4, color_5} = this.state;
+        const { color_1, color_2, color_3, color_4, color_5, id, name, specified, input} = this.state;
         return (
             <article className={`${this.props.select}-container container`}>
                 <section className="color color-1" style={{background: color_1}}>
@@ -104,7 +120,7 @@ export class PaletteGenerator extends Component {
                         className={`freeze-color`}
 
                         style={{background: color_1}}
-                        onClick={(e, num, color) => this.lockColor(e, 1, color_1)}>
+                        onClick={(e, num, color) => this.lockColor(e, 1)}>
                         <img className="lock" src={lock} />
                     </button>
                 </section>
@@ -112,7 +128,7 @@ export class PaletteGenerator extends Component {
                     <button 
                         className="freeze-color" 
                         style={{background: color_2}}
-                        onClick={(e, num, color) => this.lockColor(e, 2, color_2)}>
+                        onClick={(e, num, color) => this.lockColor(e, 2)}>
                         <img className="lock" src={lock} />
                     </button>
                 </section>
@@ -120,7 +136,7 @@ export class PaletteGenerator extends Component {
                     <button 
                         className="freeze-color" 
                         style={{background: color_3}}
-                        onClick={(e, num, color) => this.lockColor(e, 3, color_3)}>
+                        onClick={(e, num, color) => this.lockColor(e, 3)}>
                         <img className="lock" src={lock} />
                     </button>
                 </section>
@@ -128,7 +144,7 @@ export class PaletteGenerator extends Component {
                     <button 
                         className="freeze-color" 
                         style={{background: color_4}}
-                        onClick={(e, num, color) => this.lockColor(e, 4, color_4)}>
+                        onClick={(e, num, color) => this.lockColor(e, 4)}>
                         <img className="lock" src={lock} />
                     </button>
                 </section>
@@ -136,11 +152,19 @@ export class PaletteGenerator extends Component {
                     <button 
                         className="freeze-color" 
                         style={{background: color_5}}
-                        onClick={(e, num, color) => this.lockColor(e, 5, color_5)}>
+                        onClick={(e, num, color) => this.lockColor(e, 5)}>
                         <img className="lock" src={lock} />
                     </button>
                 </section>
-                <ProjectForm />
+                {!specified && <ProjectForm />}
+                {specified && <h4 className={`${!input}-pal-name specified-name`} onClick={this.changeState}>{name}</h4>}
+                {specified && <input 
+                    className={`${input}-pal-input`}
+                    type="text"
+                    onChange={this.handleOnChange}
+                    onKeyUp={(e, id) => this.updatePalette(e, this.state.id)}
+                    placeholder={name}
+                />}
                 <button className="generate-btn"
                     onClick={this.generatePalette}>
                     <img className="generate-icon" src={generate} />

@@ -62,8 +62,8 @@ export class Projects extends Component {
             onKeyUp={(e, id) => this.updateProjectName(e, project.id)}
             placeholder={project.name}
           />
-          <button onClick={id => this.deleteProject(project.id)} id={project.id} className="delete-project-btn">X</button>
         </Link>
+          <button onClick={id => this.deleteProject(project.id)} id={project.id} className="delete-project-btn">X</button>
           <Palettes projectId={project.id} />
         </div>
       )
