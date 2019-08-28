@@ -44,6 +44,10 @@ export class Projects extends Component {
     this.setState({defaultName: e.target.value})
   }
 
+  handleCancelUpdateProject = () => {
+    this.setState({updateProjectOpen: false})
+  }
+
 
   generateProjects = () => {
     const  {projects, selectedProject}  = this.props;
@@ -68,8 +72,11 @@ export class Projects extends Component {
         <ProjectForm getUpdatedProject={this.props.getUpdatedProject}/> 
         </div>
         {this.state.updateProjectOpen && <form className="update-project-form">
-          <input type="text" className="updated-name-input" defaultValue={this.state.defaultName} onChange={this.handleChange}/>
-          <button className="update-project-btn" onClick={this.handleUpdateProject}>Update</button>
+          <input type="text" className="updated-name-input" defaultValue={this.state.defaultName} maxLength="30" onChange={this.handleChange}/>
+          <div className="updat-project-btn-container">
+            <button className="update-project-btn" onClick={this.handleUpdateProject}>Update</button>
+            <button className="cancel-project-btn" onClick={this.handleCancelUpdateProject}>Cancel</button>
+          </div>
         </form>}
       </div>
     )

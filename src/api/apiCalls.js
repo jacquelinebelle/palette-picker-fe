@@ -1,6 +1,6 @@
 export const fetchProjects = () => {
 
-  return  fetch(process.env.REACT_APP_BACKEND_URL + '/api/v1/projects')
+  return  fetch(`${process.env.REACT_APP_BACKEND_URL}/api/v1/projects`)
         .then(res => {
           if (res.ok) {
            return res.json()

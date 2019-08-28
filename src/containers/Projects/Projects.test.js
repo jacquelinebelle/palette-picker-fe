@@ -34,7 +34,17 @@ describe('Projects', () => {
     expect(wrapper.instance().handleUpdateProject).toHaveBeenCalled();
   })
 
+  it('handleChange should set state', () => {
+    let event = {target: {name: 'name', value: 'Sam'}}
+    wrapper.instance().handleChange(event)
+    expect(wrapper.state().defaultName).toEqual("Sam")
+  })
 
+  it('handleCancelUpdateProject should set state', () => {
+
+    wrapper.instance().handleCancelUpdateProject()
+    expect(wrapper.state().updateProjectOpen).toEqual(false)
+  })
 
   it('should return selected project', () => {
     const mockState = {

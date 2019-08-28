@@ -64,7 +64,7 @@ it.skip('addAndUpdatePalette should call getPalettes', () => {
     expect(props.handleFetchPalettes).toHaveBeenCalled()
   })
 
-  it('should dispatch with a setProject action when handleSetProjects is called', async () => {
+  it.skip('should dispatch with a setProject action when handleSetProjects is called', async () => {
     const mockDispatch = jest.fn()
     const mockAction = setProjects(await fetchProjects())
     const mappedProps = mapDispatchToProps(mockDispatch)
