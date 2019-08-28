@@ -13,7 +13,7 @@ describe('PaletteGenerator', () => {
       handleSetGeneratedColors: jest.fn(),
       handleOpenPaletteGenerator: jest.fn(),
       addAndUpdatePalette: jest.fn(),
-      openPaletteGen: false,
+      openPaletteGen: {open: false},
       // submitNewPalette: jest.fn()
     }
   wrapper = shallow(<PaletteGenerator {...props}/>);
@@ -29,10 +29,71 @@ describe('PaletteGenerator', () => {
     expect(wrapper.instance().generatePalette).toHaveBeenCalled()
   });
 
-  it.skip('should call generatePalette when btn with generate-btn class is clicked', () => {
+  it('should call generatePalette when btn with generate-btn class is clicked', () => {
     wrapper.instance().generatePalette = jest.fn();
+    wrapper.instance().forceUpdate();
     wrapper.find('.generate-btn').prop('onClick')()
     expect(wrapper.instance().generatePalette).toHaveBeenCalled();
+  });
+
+  it('generatePalette should update state of color_1', () => {
+    const color =  wrapper.state().color_1
+    expect(wrapper.state().color_1).toEqual(color)
+    wrapper.instance().forceUpdate();
+
+    let event = {target: {id: 0}}
+    wrapper.instance().handleFrozen(event)
+
+    wrapper.find('.generate-btn').prop('onClick')()
+    expect(wrapper.state().color_1).toEqual(color)
+  });
+
+  it('generatePalette should update state of color_2', () => {
+    const color =  wrapper.state().color_2
+    expect(wrapper.state().color_2).toEqual(color)
+    wrapper.instance().forceUpdate();
+
+    let event = {target: {id: 1}}
+    wrapper.instance().handleFrozen(event)
+
+    wrapper.find('.generate-btn').prop('onClick')()
+    expect(wrapper.state().color_2).toEqual(color)
+  });
+
+  it('generatePalette should update state of color_3', () => {
+    const color =  wrapper.state().color_3
+    expect(wrapper.state().color_3).toEqual(color)
+    wrapper.instance().forceUpdate();
+
+    let event = {target: {id: 2}}
+    wrapper.instance().handleFrozen(event)
+
+    wrapper.find('.generate-btn').prop('onClick')()
+    expect(wrapper.state().color_3).toEqual(color)
+  });
+
+  it('generatePalette should update state of color_4', () => {
+    const color =  wrapper.state().color_4
+    expect(wrapper.state().color_4).toEqual(color)
+    wrapper.instance().forceUpdate();
+
+    let event = {target: {id: 3}}
+    wrapper.instance().handleFrozen(event)
+
+    wrapper.find('.generate-btn').prop('onClick')()
+    expect(wrapper.state().color_4).toEqual(color)
+  });
+
+  it('generatePalette should update state of color_5', () => {
+    const color =  wrapper.state().color_5
+    expect(wrapper.state().color_5).toEqual(color)
+    wrapper.instance().forceUpdate();
+
+    let event = {target: {id: 4}}
+    wrapper.instance().handleFrozen(event)
+
+    wrapper.find('.generate-btn').prop('onClick')()
+    expect(wrapper.state().color_5).toEqual(color)
   });
 
   it('togglePaletteGenerator should call handleOpenPaletteGenerator', () => {
@@ -47,12 +108,43 @@ describe('PaletteGenerator', () => {
     expect(spy).toHaveBeenCalled();
   });
 
-  it('handleFrozen should should update set state', () => {
+  it('submitNewPalette should call other functiions', () => {
+
+    let event = {target: {name: 'name', value: 'James'}}
+      wrapper.instance().handleOnChange(event)
+ 
+    wrapper.instance().clearInput = jest.fn()
+    wrapper.instance().forceUpdate();
+    wrapper.find('.add-update-palette-btn').prop('onClick')()
+    expect(props.addAndUpdatePalette).toHaveBeenCalled();
+    expect(wrapper.instance().clearInput).toHaveBeenCalled();
+    expect(wrapper.state().frozen).toEqual(['Lock', 'Lock', 'Lock', 'Lock', 'Lock'])
+  });
+
+  it('handleFrozen have been called with click', () => {
     wrapper.instance().handleFrozen = jest.fn();
     wrapper.instance().forceUpdate();
     wrapper.find('.color-1').prop('onClick')()
     expect(wrapper.instance().handleFrozen
     ).toHaveBeenCalled();
+  });
+
+  it('handleFrozen should should update set state from Lock to Locked', () => {
+
+    expect(wrapper.state().frozen).toEqual(["Lock", "Lock", "Lock", "Lock", "Lock"])
+    let event = {target: {id: 1}}
+    wrapper.instance().handleFrozen(event)
+    expect(wrapper.state().frozen).toEqual(["Lock", "Locked", "Lock", "Lock", "Lock"])
+  });
+
+  it('handleFrozen should should update set state from Locked to Lock', () => {
+    let event = {target: {id: 1}}
+    wrapper.instance().handleFrozen(event)
+
+    expect(wrapper.state().frozen).toEqual(["Lock", "Locked", "Lock", "Lock", "Lock"])
+
+    wrapper.instance().handleFrozen(event)
+    expect(wrapper.state().frozen).toEqual(["Lock", "Lock", "Lock", "Lock", "Lock"])
   });
 
   it('handleOnChange should hande change paletteName', () => {

@@ -32,12 +32,14 @@ export class PaletteGenerator extends Component {
         var colors = scheme.colors();
         var palette = colors.map(color => '#' + color).slice(10, 15);
 
+        const {frozen, color_1, color_2, color_3, color_4, color_5} = this.state
+
         this.setState({
-            color_1: this.state.frozen[0] === 'Locked' ? this.state.color_1 : palette[0],
-            color_2: this.state.frozen[1] === 'Locked' ? this.state.color_2 : palette[1],
-            color_3: this.state.frozen[2] === 'Locked' ? this.state.color_3 : palette[2],
-            color_4: this.state.frozen[3] === 'Locked' ? this.state.color_4 : palette[3],
-            color_5: this.state.frozen[4] === 'Locked' ? this.state.color_5 : palette[4]
+            color_1: frozen[0] === 'Locked' ? color_1 : palette[0],
+            color_2: frozen[1] === 'Locked' ? color_2 : palette[1],
+            color_3: frozen[2] === 'Locked' ? color_3 : palette[2],
+            color_4: frozen[3] === 'Locked' ? color_4 : palette[3],
+            color_5: frozen[4] === 'Locked' ? color_5 : palette[4]
         });
         this.props.handleSetGeneratedColors(palette);
         
@@ -79,15 +81,16 @@ export class PaletteGenerator extends Component {
         this.setState({paletteName: ""})
     }
 
+    palleteGenstyle = () => {
+        const { open } = this.props.openPaletteGen;
+        return open ? {display: 'flex'} : {display: 'none'}
+    }
 
     render() {
         const { frozen } = this.state
-
-        const { open } = this.props.openPaletteGen;
-        const palleteGenstyle = open ? {display: 'flex'} : {display: 'none'}
         
         return (
-            <div className="palette-gen-container" style={palleteGenstyle}>
+            <div className="palette-gen-container" style={this.palleteGenstyle()}>
                 <article  className="container" >
                     <section className="color color-1" onClick={this.handleFrozen} id="0" style={{background: this.state.color_1}}>{frozen[0]}</section>
                     <section className="color color-2" onClick={this.handleFrozen} id="1" style={{background: this.state.color_2}}>{frozen[1]}</section>
