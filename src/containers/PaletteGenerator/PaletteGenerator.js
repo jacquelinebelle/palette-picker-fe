@@ -65,7 +65,6 @@ export class PaletteGenerator extends Component {
 
     submitNewPalette = () => {
         const { paletteName } = this.state
-        console.log('hyyyy')
         if(paletteName !== "") {
             this.props.addAndUpdatePalette(paletteName)
             this.props.handleOpenPaletteGenerator()

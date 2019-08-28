@@ -11,7 +11,7 @@ export const fetchProjects = () => {
 }
 
 export const fetchAddProject = projectName => {
-    return  fetch('http://localhost:3001/api/v1/projects', {
+    return  fetch(process.env.REACT_APP_BACKEND_URL + '/api/v1/projects', {
         method: 'POST',
         headers: {'Content-type' : 'application/json'},
         body: JSON.stringify({name: projectName})
@@ -27,7 +27,7 @@ export const fetchAddProject = projectName => {
 
 
   export const fetchDeleteProject = id => {
-    return  fetch(`http://localhost:3001/api/v1/projects/${id}`, {
+    return  fetch(process.env.REACT_APP_BACKEND_URL + `/api/v1/projects/${id}`, {
         method: 'DELETE'
     })
     .then(res => {
@@ -41,7 +41,7 @@ export const fetchAddProject = projectName => {
 
 
   export const fetchPalettes = id => {
-    return  fetch(`http://localhost:3001/api/v1/projects/${id}/palettes`)
+    return  fetch(process.env.REACT_APP_BACKEND_URL + `/api/v1/projects/${id}/palettes`)
               .then(res => {
                 if (res.ok) {
                 return res.json()
@@ -52,7 +52,7 @@ export const fetchAddProject = projectName => {
   }
 
   export const fetchAddPalette = (id, newPalette) => {
-    return  fetch(`http://localhost:3001/api/v1/projects/${id}`, {
+    return  fetch(process.env.REACT_APP_BACKEND_URL + `/api/v1/projects/${id}`, {
         method: 'POST',
         headers: {'Content-type' : 'application/json'},
         body: JSON.stringify({ ...newPalette })
@@ -67,7 +67,7 @@ export const fetchAddProject = projectName => {
   }
 
   export const fetchDeletePalette = id => {
-    return  fetch(`http://localhost:3001/api/v1/projects/palettes/${id}`, {
+    return  fetch(process.env.REACT_APP_BACKEND_URL + `/api/v1/projects/palettes/${id}`, {
         method: 'DELETE'
     })
     .then(res => {
@@ -82,7 +82,7 @@ export const fetchAddProject = projectName => {
 
   export const fetchUpdateProject = (id, updatedProject) => {
 
-    return  fetch(`http://localhost:3001/api/v1/projects/${id}`, {
+    return  fetch(process.env.REACT_APP_BACKEND_URL + `/api/v1/projects/${id}`, {
         method: 'PATCH',
         headers: {'Content-type' : 'application/json'},
         body: JSON.stringify({ ...updatedProject})
@@ -100,7 +100,7 @@ export const fetchAddProject = projectName => {
 
   export const fetchUpdatePalette = (id, updatedPalette) => {
 
-    return  fetch(`http://localhost:3001/api/v1/projects/palettes/${id}`, {
+    return  fetch(process.env.REACT_APP_BACKEND_URL + `/api/v1/projects/palettes/${id}`, {
         method: 'PATCH',
         headers: {'Content-type' : 'application/json'},
         body: JSON.stringify({ ...updatedPalette})
