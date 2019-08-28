@@ -28,6 +28,12 @@
     position: absolute;
     top: 0;
     width: 85px;
+    cursor: pointer;
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 12px;
 }
 
 .color-1 {
