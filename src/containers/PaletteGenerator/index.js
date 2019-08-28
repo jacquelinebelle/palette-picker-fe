@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import ProjectForm from '../ProjectForm';
 import { setGeneratedColors } from '../../actions';
 import { fetchPalette } from '../../api/apiCalls';
-import { Redirect } from 'react-router';
 import generate from '../../assets/generate.svg'
 import lock from '../../assets/lock.svg'
 import './PaletteGenerator.scss';
@@ -18,8 +17,7 @@ export class PaletteGenerator extends Component {
             color_3: '',
             color_4: '',
             color_5: '',
-            name: '',
-            error: false
+            name: ''
         }
     }
 
@@ -30,7 +28,7 @@ export class PaletteGenerator extends Component {
             const id = this.props.id.split('/')[3]
             const palette = await fetchPalette(id);
             palette.name === undefined ? 
-            this.state.error = true 
+            this.props.history.replace('/404')
             : this.getSpecifiedPalette(palette[0]);
             
         }
@@ -101,7 +99,6 @@ export class PaletteGenerator extends Component {
         const { color_1, color_2, color_3, color_4, color_5} = this.state;
         return (
             <article className={`${this.props.select}-container container`}>
-            {this.state.error && <Redirect to='/404'/>}
                 <section className="color color-1" style={{background: color_1}}>
                     <button 
                         className={`freeze-color`}

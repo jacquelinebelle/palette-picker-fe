@@ -17,13 +17,6 @@ class Project extends Component {
         const project = await fetchProject(id)
         const palettes = await fetchPalettes(id)
         this.setState({ name: project.name, palettes })
-
-        // 
-        // name: "ryland's big adventure :)"
-        // palettes: Array(2)
-        // 0: {id: 18, name: "jqpwijgibq", color_1: "#ccffcc", color_2: "#66cc33", color_3: "#cc6699", …}
-        // 1: {id: 20, n
-        //     }
     }
 
     displayPalettes = () => {

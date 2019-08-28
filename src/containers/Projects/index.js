@@ -48,8 +48,8 @@ export class Projects extends Component {
   displayProjects = () => {
     return this.state.projects.map(project => {
       return (
-        <Link className="proj-link" exact to={`/projects/${project.id}/palettes`} key={project.id}>
-        <div className="project-container">
+        <div className="project-container" key={project.id}>
+          <Link className="proj-link" exact to={`/projects/${project.id}/palettes`}>
           <h4
             className={`${!this.state.input}-name project-name`}
             onClick={this.changeState}>
@@ -63,9 +63,9 @@ export class Projects extends Component {
             placeholder={project.name}
           />
           <button onClick={id => this.deleteProject(project.id)} id={project.id} className="delete-project-btn">X</button>
+        </Link>
           <Palettes projectId={project.id} />
         </div>
-        </Link>
       )
       
     })

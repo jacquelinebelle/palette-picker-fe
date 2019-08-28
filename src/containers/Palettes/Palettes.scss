@@ -1,8 +1,37 @@
+.pal-link {
+  color: #626262;
+  text-decoration: none;
+}
+
+
+
 .palette-container {
-    display: flex;
+  padding-bottom: 20px;
+  .pal-link {
+      display: flex;
+      position: absolute;
+      left: 31px;
+      margin-top: -40px;
+    }
+    .pal-color {
+      height: 40px;
+      margin: 8px 0;
+      width: 40px;
+    }
+    .delete-palette-btn {
+      border: none;
+      color: lightgray;
+      cursor: pointer;
+      font-size: 18px;
+      height: 28px;
+      justify-content: flex-end;
+      margin-top: 15px;
+      padding-top: 5.8px;
+      width: 28px;
+    }
   }
   
-  .palette-container:hover {
+  .palette-name:hover {
     font-weight: 600;
   }
   
@@ -11,25 +40,25 @@
     margin: 0 0 0 28px;
   }
   
-  .pal-color {
-    height: 40px;
-    margin: 8px 0;
-    width: 40px;
-  }
+  // .pal-color {
+  //   height: 40px;
+  //   margin: 8px 0;
+  //   width: 40px;
+  // }
   
-  .delete-palette-btn {
-    border: none;
-    color: lightgray;
-    cursor: pointer;
-    font-size: 18px;
-    height: 28px;
-    justify-content: flex-end;
-    margin-top: 15px;
-    outline: none;
-    padding-top: 1.8px;
-    top: 12px;
-    width: 28px;
-  }
+  // .delete-palette-btn {
+  //   border: none;
+  //   color: lightgray;
+  //   cursor: pointer;
+  //   font-size: 18px;
+  //   height: 28px;
+  //   justify-content: flex-end;
+  //   margin-top: 15px;
+  //   outline: none;
+  //   padding-top: 1.8px;
+  //   top: 12px;
+  //   width: 28px;
+  // }
   
   .delete-palette-btn:hover {
     background: rgba(185, 22, 22, 0.692);

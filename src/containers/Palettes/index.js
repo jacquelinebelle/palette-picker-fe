@@ -46,14 +46,16 @@ export class Palettes extends Component {
     const { palettes } = this.state;
     if (typeof palettes !== 'string') {
       return palettes.map(pal => {
+        console.log(pal.id)
         return (
-        
+          <>
             <Link className="pal-link" exact to={`/projects/palettes/${pal.id}`} key={pal.id}>
               <h5 
                 className={`${!this.state.input}-pal-name palette-name`}
                 onClick={this.changeState}>
                 {pal.name}
               </h5>
+              </Link>
               <input 
                 className={`${this.state.input}-pal-input`}
                 type="text"
@@ -67,13 +69,15 @@ export class Palettes extends Component {
                   onClick={id => this.deletePalette(pal.id)}>
                     x
                 </button>
+                <Link className="pal-link" exact to={`/projects/palettes/${pal.id}`}>
                 <div className="pal-color" style={{background: pal.color_1}} />
                 <div className="pal-color" style={{background: pal.color_2}} />
                 <div className="pal-color" style={{background: pal.color_3}} />
                 <div className="pal-color" style={{background: pal.color_4}} />
                 <div className="pal-color" style={{background: pal.color_5}} />
-              </div>
-            </Link>
+              </Link>
+            </div>
+            </>
         )
       })
     } else {

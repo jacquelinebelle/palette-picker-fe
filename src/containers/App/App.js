@@ -70,7 +70,7 @@ export class App extends Component {
           <Route exact path='/404' render={() => <NotFound />} />
           <Route exact path='/projects' render={() => <Projects />} />
           <Route exact path={`/projects/:id/palettes`} render={(id) => <Project id={id.location.pathname} />} />
-          <Route exact path={`/projects/palettes/:id`} render={(id) => <PaletteGenerator id={id.location.pathname} />} />
+          <Route exact path={`/projects/palettes/:id`} render={(id) => <PaletteGenerator id={id.location.pathname} history={id.history} />} />
         </Switch>
         <Background 
           color_1={colors[0]}
