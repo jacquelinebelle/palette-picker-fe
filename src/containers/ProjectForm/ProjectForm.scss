@@ -29,6 +29,7 @@
   color: #626262;
   font-size: 13px;
   padding-bottom: 6px;
+  width: 150px;
 }
 
 .add-project-btn, .save-palette-btn {
@@ -85,4 +86,12 @@ form.true {
 
 .save-palette.true {
   top: -2px;
+}
+
+.choose-prompt {
+  color: #626262;
+  letter-spacing: 0.5px;
+  position: absolute;
+  top: -7px;
+  width: 260px;
 }

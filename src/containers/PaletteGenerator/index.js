@@ -39,6 +39,8 @@ export class PaletteGenerator extends Component {
                 this.setState({ [key]: palette[index] })
             }
         })
+
+        this.props.setGeneratedColors(palette)
     }
 
     togglePaletteGenerator = () => {
@@ -64,9 +66,9 @@ export class PaletteGenerator extends Component {
     lockColor = (e, num, color) => {
         let lockedColor = `color_${num}`
         if (e.target.className === 'locked') {
-            e.target.className = "lock"
             let unlocked = this.state[lockedColor].split('-')[1]
             this.state[lockedColor] = unlocked;
+            e.target.className = "lock"
         } else {
             e.target.className = "locked"
             let lockedState = `locked-${this.state[lockedColor]}`
@@ -135,8 +137,7 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = (dispatch) => ({
-    handleSetGeneratedColors: (colors) => dispatch(setGeneratedColors(colors)),
-    handleOpenPaletteGenerator: () => dispatch(openPaletteGenerator())
+    setGeneratedColors: colors => dispatch(setGeneratedColors(colors))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaletteGenerator);

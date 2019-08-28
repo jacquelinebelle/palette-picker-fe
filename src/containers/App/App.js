@@ -7,6 +7,7 @@ import Projects from '../Projects';
 import Nav from '../../components/Nav';
 import { fetchProjects } from '../../api/apiCalls';
 import Palettes from '../Palettes';
+import Project from '../Project'
 import { connect } from 'react-redux';
 import './App.scss';
 import {projectSelected, setPalettes } from '../../actions';
@@ -65,8 +66,9 @@ export class App extends Component {
         <Nav />
         <Switch>
           <Route exact path='/' render={() => <PaletteGenerator />} />
-          <Route exact path='/projects' render={(props) => <Projects projects={this.state.projects} />} />
+          <Route exact path='/projects' render={() => <Projects />} />
         </Switch>
+        <Route exact path={`/projects/:id/palettes`} render={(id) => <Project id={id.location.pathname} />} />
         <Background 
           color_1={colors[0]}
           color_2={colors[1]}

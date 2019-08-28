@@ -8,6 +8,16 @@ export const fetchProjects = async () => {
   }      
 }
 
+export const fetchProject = async (id) => {
+  try {
+    const response = await fetch(`https://palette-picker-backend.herokuapp.com/api/v1/projects/${id}`)
+    const project = await response.json();
+    return project.project[0];
+  } catch (error) {
+    console.log(error)
+  }      
+}
+
 export const fetchAddProject = projectName => {
   console.log('bb')
     return  fetch('https://palette-picker-backend.herokuapp.com/api/v1/projects', {

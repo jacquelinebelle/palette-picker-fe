@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import './Palettes.css';
+import './Palettes.scss';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { openPaletteGenerator } from '../../actions';
 import { fetchPalettes, fetchDeletePalette, fetchPatchPalette } from '../../api/apiCalls';
@@ -46,7 +47,7 @@ export class Palettes extends Component {
     if (typeof palettes !== 'string') {
       return palettes.map(pal => {
         return (
-            <>
+            <Link className="pal-link" exact to={`/projects/${pal.id}/palettes`}>
               <h5 
                 className={`${!this.state.input}-pal-name palette-name`}
                 onClick={this.changeState}>
@@ -71,7 +72,7 @@ export class Palettes extends Component {
                 <div className="pal-color" style={{background: pal.color_4}} />
                 <div className="pal-color" style={{background: pal.color_5}} />
               </div>
-            </>
+            </Link>
         )
       })
     } else {
