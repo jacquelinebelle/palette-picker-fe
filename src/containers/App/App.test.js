@@ -13,7 +13,8 @@ describe('App', () => {
      mockColors = ["#000000"];
      props = {
       handleSetProjects: jest.fn(),
-      handleProjectSelected: jest.fn()
+      handleProjectSelected: jest.fn(),
+      handleFetchPalettes: jest.fn()
     }
     wrapper = shallow(<App colors={mockColors} {...props}/>);
   })
@@ -29,32 +30,39 @@ describe('App', () => {
     expect(props.handleSetProjects).toHaveBeenCalledTimes(2)
   });
 
-  it('getUpdatedProject should clal handleSetProject', () => {
-    wrapper.instance().getUpdatedProject = jest.fn()
+  it('getUpdatedProject should call handleSetProject', () => {
+    wrapper.instance().getUpdatedProject = jest.fn();
     wrapper.instance().getUpdatedProject();
-    expect(props.handleSetProjects).toHaveBeenCalled()
+    wrapper.instance().forceUpdate();
+    expect(props.handleSetProjects).toHaveBeenCalled();
   })
 
-  // it.skip('addPalette should call fetchAddPalette', () => {
-  //   wrapper.instance().addPalette = jest.fn();
 
-  //   wrapper.instance().addPalette();
-  //   expect(wrapper.instance().fetchAddPalette).toHaveBeenCalled()
-  // })
+//////////////////
 
-  // it('getPalettes should setState currentProject', () => {
-  //     wrapper.instance().setState({currentProject: 0})
-  //     const expectedCurrentProject = 0
-  //     expect(wrapper.state().currentProject).toEqual(expectedCurrentProject)
-  //     wrapper.instance().getPalettes(1)
-  //     const expectedCurrentProjectAfterReset = 1
-  //     expect(wrapper.state().currentProject).toEqual(expectedCurrentProjectAfterReset)
 
-  //     wrapper.instance().handleFetchPalettes = jest.fn();
-  //     expect(wrapper.instance().handleFetchPalettes).toHaveBeenCalled();
+it.skip('addAndUpdatePalette should call getPalettes', () => {
+  const spy = jest.spyOn(wrapper.instance(), "getPalettes");
+  wrapper.instance().forceUpdate();
+  // wrapper.find('.project-name').prop('onClick')()
+  wrapper.instance().addAndUpdatePalette = jest.fn();
+  wrapper.instance().addAndUpdatePalette();
+  expect(spy).toHaveBeenCalled();
 
-  // })
+  // wrapper.instance().addAndUpdatePalette = jest.fn();
+  // wrapper.instance().addAndUpdatePalette();
+  // expect(wrapper.instance().getPalettes).toHaveBeenCalled()
+})
 
+  it.skip('getPalettes should call handleProjectSelected and handleFetchPalettes', () => {
+  
+    wrapper.instance().getUpdatedProject = jest.fn();
+    wrapper.instance().getUpdatedProject();
+
+    // wrapper.instance().getPalettes = jest.fn();
+    // wrapper.instance().getPalettes();
+    expect(props.handleFetchPalettes).toHaveBeenCalled()
+  })
 
   it('should dispatch with a setProject action when handleSetProjects is called', async () => {
     const mockDispatch = jest.fn()

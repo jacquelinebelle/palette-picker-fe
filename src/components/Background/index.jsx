@@ -1,7 +1,9 @@
 import React from 'react';
 import './Background.scss';
 
-const Background = ({ color_1, color_2, color_3, color_4, color_5 }) => {
+
+
+export const Background = ({ color_1, color_2, color_3, color_4, color_5 }) => {
 
     return (
         <section className="background">

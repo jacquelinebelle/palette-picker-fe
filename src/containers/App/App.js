@@ -45,14 +45,13 @@ export class App extends Component {
   }
 
   getPalettes = id => {
-    this.setState({currentProject: id})
+    // this.setState({currentProject: id})
     this.props.handleProjectSelected(id)
     this.handleFetchPalettes(id)
   }
 
   handleFetchPalettes = (id) => {
     fetchPalettes(id).then(data => {
-
       if (data === 'Cannot fetch palettes') {
         this.setState({hasPalettes: false})
         this.props.handleSetPalettes([{error: 'No palettes under this project'}])

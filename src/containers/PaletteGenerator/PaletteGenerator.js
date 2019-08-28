@@ -65,7 +65,7 @@ export class PaletteGenerator extends Component {
 
     submitNewPalette = () => {
         const { paletteName } = this.state
-
+        console.log('hyyyy')
         if(paletteName !== "") {
             this.props.addAndUpdatePalette(paletteName)
             this.props.handleOpenPaletteGenerator()
@@ -96,7 +96,9 @@ export class PaletteGenerator extends Component {
                     <section className="color color-4" onClick={this.handleFrozen} id="3" style={{background: this.state.color_4}}>{frozen[3]}</section>
                     <section className="color color-5" onClick={this.handleFrozen} id="4" style={{background: this.state.color_5}}>{frozen[4]}</section>
                     <input type="text" maxLength="35" value={this.state.paletteName} className="palette-name-input" placeholder="Plette name" onChange={this.handleOnChange}/>
+
                     <button className="gen-add-btn generate-btn" onClick={this.generatePalette} >Generate</button>
+
                     <button className="gen-add-btn add-update-palette-btn" onClick={this.submitNewPalette}
                     >{this.props.openPaletteGen.type}</button>
                     <button className="close-gen-btn" onClick={this.togglePaletteGenerator}

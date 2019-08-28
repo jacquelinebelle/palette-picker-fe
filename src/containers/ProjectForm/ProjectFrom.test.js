@@ -23,10 +23,18 @@ describe('ProjectForm', () => {
     expect(wrapper.state()).toEqual(expected)
   })
 
-  it.skip('clearInput', () => {
-    expect(wrapper.state().name).toEqual("Lis")
+  it('clearInput', () => {
+
+    expect(wrapper.state().name).toEqual("")
+
+     let event = {target: {name: 'name', value: 'Lis'}}
+      wrapper.instance().handleChange(event)
+
+      expect(wrapper.state().name).toEqual("Lis")
+
       wrapper.instance().clearInput()
-      expect(wrapper.state().name).toEqual("")
+      const afterChange = ""
+      expect(wrapper.state().name).toEqual(afterChange)
   })
 
 });

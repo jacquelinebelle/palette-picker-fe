@@ -4,17 +4,37 @@ import { Projects, mapStateToProps } from './Projects';
 // import { openPaletteGenerator } from '../../actions';
 
 
-describe('ProjectForm', () => {
+describe('Projects', () => {
   let wrapper;
+  let props;
 
   beforeEach(() => {
-
-    wrapper = shallow(<Projects projects={[{name: 'project'}]}/>);
+    props = {
+      getPalettes: jest.fn()
+    }
+    wrapper = shallow(<Projects projects={[{name: 'project'}]} {...props}/>);
   })
 
   it('should match the snapshot', () => {
     expect(wrapper).toMatchSnapshot();
   });
+
+  it('on click handleGetPalettes should have been called', () => {
+      const spy = jest.spyOn(wrapper.instance(), "handleGetPalettes");
+      wrapper.instance().forceUpdate();
+      wrapper.find('.project-name').simulate('click', {target: {parentElement: { id: 1}}})
+      expect(spy).toHaveBeenCalled();
+  })
+
+  it.skip('on click handleDeleteProject should have been called', () => {
+    // const spy = jest.spyOn(wrapper.instance(), "handleUpdateProject");
+    wrapper.instance().handleUpdateProject = jest.fn();
+    // wrapper.instance().forceUpdate();
+    wrapper.find('.update-project-btn').prop('onClick', { target: {parentElement: { id: 1}}})()
+    expect(wrapper.instance().handleUpdateProject).toHaveBeenCalled();
+  })
+
+
 
   it('should return selected project', () => {
     const mockState = {

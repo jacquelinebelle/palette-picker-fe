@@ -48,11 +48,11 @@ export class Projects extends Component {
   generateProjects = () => {
     const  {projects, selectedProject}  = this.props;
     
-    return projects.map(project => {
+    return projects.map((project, i) => {
       const selectedstyle = (project.id === selectedProject) ? {background: '#385894'} : null;
       return (
-        <div key={project.id} id={project.id} className="project-container">
-          <h4 className="project-name" onDoubleClick={this.handleUpdateProjectOpening} style={selectedstyle} onClick={this.handleGetPalettes}>{project.name}</h4>
+        <div key={i} id={project.id} className="project-container">
+          <h4  className="project-name" onDoubleClick={this.handleUpdateProjectOpening} style={selectedstyle} onClick={this.handleGetPalettes}>{project.name}</h4>
           <button onClick={this.handleDeleteProject} className="delete-project-btn">&#xd7;</button>
         </div>
       )
@@ -69,7 +69,7 @@ export class Projects extends Component {
         </div>
         {this.state.updateProjectOpen && <form className="update-project-form">
           <input type="text" className="updated-name-input" defaultValue={this.state.defaultName} onClick={this.handleChange}/>
-          <button onClick={this.handleUpdateProject}>Update</button>
+          <button className="update-project-btn" onClick={this.handleUpdateProject}>Update</button>
         </form>}
       </div>
     )

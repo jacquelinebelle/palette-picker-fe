@@ -14,6 +14,7 @@ describe('PaletteGenerator', () => {
       handleOpenPaletteGenerator: jest.fn(),
       addAndUpdatePalette: jest.fn(),
       openPaletteGen: false,
+      // submitNewPalette: jest.fn()
     }
   wrapper = shallow(<PaletteGenerator {...props}/>);
   })
@@ -39,14 +40,34 @@ describe('PaletteGenerator', () => {
     expect(props.handleOpenPaletteGenerator).toHaveBeenCalledTimes(1)
   });
 
-  it.skip('submitNewPalette should call other functiions', () => {
-    wrapper.instance().submitNewPalette = jest.fn();
-    wrapper.find('.add-palette-btn').prop('onClick')()
-    expect(wrapper.instance().submitNewPalette).toHaveBeenCalled();
+  it('submitNewPalette should call other functiions', () => {
+    const spy = jest.spyOn(wrapper.instance(), "submitNewPalette");
+    wrapper.instance().forceUpdate();
+    wrapper.find('.add-update-palette-btn').prop('onClick')()
+    expect(spy).toHaveBeenCalled();
   });
 
-  it.skip('clearInput', () => {
-    expect(wrapper.state().paletteName).toEqual("Lis")
+  it('handleFrozen should should update set state', () => {
+    wrapper.instance().handleFrozen = jest.fn();
+    wrapper.instance().forceUpdate();
+    wrapper.find('.color-1').prop('onClick')()
+    expect(wrapper.instance().handleFrozen
+    ).toHaveBeenCalled();
+  });
+
+  it('handleOnChange should hande change paletteName', () => {
+      let event = {target: {name: 'name', value: 'Justin'}}
+      wrapper.instance().handleOnChange(event)
+      expect(wrapper.state().paletteName).toEqual("Justin")
+  })
+
+  it('clearInput should clear paletteName state', () => {
+    expect(wrapper.state().paletteName).toEqual(undefined)
+
+      let event = {target: {name: 'name', value: 'Someone'}}
+      wrapper.instance().handleOnChange(event)
+      expect(wrapper.state().paletteName).toEqual("Someone")
+
       wrapper.instance().clearInput()
       expect(wrapper.state().paletteName).toEqual("")
   })

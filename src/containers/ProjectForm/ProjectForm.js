@@ -10,11 +10,11 @@ export class ProjectForm extends Component {
         }
     }
 
-    handleChange = (e) => {
+    handleChange = e => {
         this.setState({ [e.target.name]: e.target.value })
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = e => {
         e.preventDefault();
         const name = this.state.name;
         fetchAddProject(name).then(() => 
