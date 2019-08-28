@@ -82,7 +82,7 @@
   border: none;
   cursor: pointer;
   font-size: 16px;
-  color: gray;
+  color: rgb(128, 128, 128);
   outline: none;
   padding-bottom: 4px;
 }
@@ -107,7 +107,7 @@
 }
 
 .edit-palette-btn:hover {
-  background: rgba(64, 64, 190, 0.466);
+  background: rgba(211, 208, 24, 0.466);
 }
 
 .dot {

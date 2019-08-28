@@ -124,7 +124,7 @@ describe('PaletteGenerator', () => {
   it('handleFrozen have been called with click', () => {
     wrapper.instance().handleFrozen = jest.fn();
     wrapper.instance().forceUpdate();
-    wrapper.find('.color-1').prop('onClick')()
+    wrapper.find('.lock-1').prop('onClick')()
     expect(wrapper.instance().handleFrozen
     ).toHaveBeenCalled();
   });

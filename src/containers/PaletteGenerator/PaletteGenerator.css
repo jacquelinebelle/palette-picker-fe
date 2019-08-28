@@ -28,7 +28,6 @@
     position: absolute;
     top: 0;
     width: 85px;
-    cursor: pointer;
     font-family: sans-serif;
     display: flex;
     justify-content: center;
@@ -134,4 +133,11 @@
 
 .palette-name-input:focus {
     background: #fff;
+}
+
+.lock {
+    height: 20px;
+    padding-left: 8px;
+    margin-bottom: 5px;
+    cursor: pointer;
 }

@@ -3,6 +3,7 @@ import './Palettes.css';
 import { connect } from 'react-redux';
 import { openPaletteGenerator } from '../../actions';
 import { fetchDeletePalette } from '../../api/apiCalls';
+import pen from '../../images/pen.png';
 
 export class Palettes extends Component {
 
@@ -32,7 +33,7 @@ export class Palettes extends Component {
           return (
             <div key={i} id={palette.id} className="palette-container">
               <button onClick={this.handleDeletePalette} className="delete-palette-btn" id={palette.project_id}>&#xd7;</button>
-              <button onClick={this.togglePaletteGenerator} name="Update" className="edit-palette-btn" id={palette.name}></button>
+              <img onClick={this.togglePaletteGenerator} name="Update" className="edit-palette-btn" id={palette.name} src={pen} alt="pen"/>
               <h4 className="palette-name" >{palette.name}</h4>
               <section className="pal-colors-container">
                 <section className="pal-color pal-color-1" style={{background: palette.color_1}} >{palette.color_1}</section>

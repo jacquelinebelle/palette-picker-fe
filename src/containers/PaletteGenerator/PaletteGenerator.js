@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setGeneratedColors, openPaletteGenerator } from '../../actions';
 import './PaletteGenerator.css';
-var ColorScheme = require('color-scheme');
+import locked from '../../images/locked.png';
+import unlocked from '../../images/unlocked.png';
+let ColorScheme = require('color-scheme');
+
 
 export class PaletteGenerator extends Component {
     constructor() {
@@ -92,11 +95,21 @@ export class PaletteGenerator extends Component {
         return (
             <div className="palette-gen-container" style={this.palleteGenstyle()}>
                 <article  className="container" >
-                    <section className="color color-1" onClick={this.handleFrozen} id="0" style={{background: this.state.color_1}}>{frozen[0]}</section>
-                    <section className="color color-2" onClick={this.handleFrozen} id="1" style={{background: this.state.color_2}}>{frozen[1]}</section>
-                    <section className="color color-3" onClick={this.handleFrozen} id="2" style={{background: this.state.color_3}}>{frozen[2]}</section>
-                    <section className="color color-4" onClick={this.handleFrozen} id="3" style={{background: this.state.color_4}}>{frozen[3]}</section>
-                    <section className="color color-5" onClick={this.handleFrozen} id="4" style={{background: this.state.color_5}}>{frozen[4]}</section>
+                    <section className="color color-1" style={{background: this.state.color_1}}>
+                         <img className="lock lock-1" onClick={this.handleFrozen} id="0"  src={frozen[0] === 'Locked' ? locked : unlocked} alt="Lock"/>
+                    </section>
+                    <section className="color color-2"style={{background: this.state.color_2}}>
+                         <img className="lock" onClick={this.handleFrozen} id="1"  src={frozen[1] === 'Locked' ? locked : unlocked} alt="Lock"/>
+                    </section>
+                    <section className="color color-3" style={{background: this.state.color_3}}>
+                         <img className="lock" onClick={this.handleFrozen} id="2"  src={frozen[2] === 'Locked' ? locked : unlocked} alt="Lock"/>
+                    </section>
+                    <section className="color color-4" style={{background: this.state.color_4}}>
+                         <img className="lock" onClick={this.handleFrozen} id="3"  src={frozen[3] === 'Locked' ? locked : unlocked} alt="Lock"/>
+                    </section>
+                    <section className="color color-5" style={{background: this.state.color_5}}>
+                         <img className="lock" onClick={this.handleFrozen} id="4"  src={frozen[4] === 'Locked' ? locked : unlocked} alt="Lock"/>                    
+                    </section>
                     <input type="text" maxLength="35" value={this.state.paletteName} className="palette-name-input" placeholder="Plette name" onChange={this.handleOnChange}/>
 
                     <button className="gen-add-btn generate-btn" onClick={this.generatePalette} >Generate</button>
