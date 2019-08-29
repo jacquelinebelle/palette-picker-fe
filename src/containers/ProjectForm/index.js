@@ -5,7 +5,7 @@ import { flipSelect } from '../../actions';
 import arrow from '../../assets/arrow.svg';
 import './ProjectForm.scss';
 
-class ProjectForm extends Component {
+export class ProjectForm extends Component {
     constructor() {
         super();
         this.state = {
@@ -48,6 +48,7 @@ class ProjectForm extends Component {
     }
 
     savePalette = async (e) => {
+        this.setState({ select: false });
         let { colors } = this.props;
         let id = e.target.value;
         let palette = {
@@ -59,7 +60,6 @@ class ProjectForm extends Component {
             color_5: colors[4]
         }
         await fetchAddPalette(id, palette);
-        this.setState({ select: false });
         this.props.flipSelect(false);
     }
 
@@ -93,7 +93,6 @@ class ProjectForm extends Component {
                         type="text"
                         name="name"
                         onChange={this.handleChange}
-                        onKeyUp={e => this.handleKeyUp(e, 'project')}
                         placeholder={this.state.nameError ? "CHOOSE UNIQUE NAME" : "START PROJECT"}
                     />
                     <button className={`add-project-btn`} onClick={e => this.handleSubmit(e, 'project')}>
@@ -138,8 +137,7 @@ class ProjectForm extends Component {
 }
 
 export const mapStateToProps = (state) => ({
-    colors: state.colors,
-    selectedProject: state.selectedProject
+    colors: state.colors
   });
 
 export const mapDispatchToProps = (dispatch) => ({

@@ -1,7 +1,7 @@
 import React from 'react';
-import {PaletteGenerator, mapDispatchToProps, mapStateToProps} from './PaletteGenerator';
+import {PaletteGenerator, mapDispatchToProps, mapStateToProps} from './index';
 import { shallow } from 'enzyme';
-import { setGeneratedColors, openPaletteGenerator } from '../../actions';
+import { setGeneratedColors } from '../../actions';
 
 describe('PaletteGenerator', () => {
   let wrapper;
@@ -10,9 +10,8 @@ describe('PaletteGenerator', () => {
   beforeEach(() => {
     //  mockColors = ["#000000"];
      props = {
-      handleSetGeneratedColors: jest.fn(),
-      handleOpenPaletteGenerator: jest.fn(),
-      addPalette: jest.fn()
+      setGeneratedColors: jest.fn()
+      
     }
   wrapper = shallow(<PaletteGenerator {...props}/>);
   })
@@ -27,54 +26,75 @@ describe('PaletteGenerator', () => {
     expect(wrapper.instance().generatePalette).toHaveBeenCalled()
   });
 
-  it.skip('should call generatePalette when btn with generate-btn class is clicked', () => {
+  it('should change state based on a particular palette when getSpecifiedPalette is called', () => {
+    let mockPalette = {
+      id: 1,
+      name: 'aquafina',
+      color_1: 'pink'
+    }
+
+    wrapper.instance().getSpecifiedPalette(mockPalette);
+
+    expect(wrapper.state('name')).toEqual('aquafina');
+  });
+
+  it('should change state to whatever is typed in a name input', () => {
+    wrapper.instance().setState({ specified: true })
+    
+    wrapper.find('.false-pal-input').simulate('change', {
+      target: { value: 'buh' }
+    })
+
+    expect(wrapper.state('name')).toEqual('buh');
+  });
+
+  it('should lock a color', () => {
+    wrapper.instance().setState({ color_1: 'pink' })
+    
+    wrapper.find('.color-1').children().simulate('click', {
+      target: { num: 1 }
+    })
+
+    expect(wrapper.state('color_1')).toEqual('locked-pink');
+  });
+
+  it.skip('should call fetchPatchPalette when updatePalette is called', () => {
+    wrapper.instance().setState({ name: 'pink' })
+    wrapper.instance().fetchPatchPalette = jest.fn();
+
+    wrapper.instance().updatePalette({ keyCode: 13 }, 1)
+
+    expect(wrapper.instance().fetchPatchPalette).toHaveBeenCalled();
+  });
+
+  it('should update input on click', () => {
+    wrapper.instance().setState({ specified: true, input: false })
+    
+    wrapper.find('.true-pal-name').simulate('click')
+
+    expect(wrapper.state('input')).toEqual(true);
+  });
+
+  it.skip('should call generatePalette when generate-btn button is clicked', () => {
     wrapper.instance().generatePalette = jest.fn();
-    wrapper.find('.generate-btn').prop('onClick')()
+    wrapper.find('.generate-btn').simulate('click')
     expect(wrapper.instance().generatePalette).toHaveBeenCalled();
   });
 
-  it('togglePaletteGenerator should call handleOpenPaletteGenerator', () => {
-    wrapper.instance().togglePaletteGenerator();
-    expect(props.handleOpenPaletteGenerator).toHaveBeenCalledTimes(1)
-  });
 
-  it.skip('submitNewPalette should call other functiions', () => {
-    wrapper.instance().submitNewPalette = jest.fn();
-    wrapper.find('.delete-btn').prop('onClick')()
-    expect(wrapper.instance().submitNewPalette).toHaveBeenCalled();
-  });
-
-  it.skip('clearInput', () => {
-    expect(wrapper.state().paletteName).toEqual("Lis")
-      wrapper.instance().clearInput()
-      expect(wrapper.state().paletteName).toEqual("")
-  })
-
-  it('should return selected project', () => {
-    const mockState = {
-      openPaletteGen: false,
-    }
-    const expected = {
-      openPaletteGen: false,
-    }
+  it('should return a boolean', () => {
+    const mockState = {"select": true}
     const mappedProps = mapStateToProps(mockState)
-    expect(mappedProps).toEqual(expected)
+    expect(mappedProps).toEqual(mockState)
   });
+
 
   it('should dispatch with a setGeneratedColors action when handleSetGeneratedColors is called', async () => {
     const mockDispatch = jest.fn();
     const mockColors = ["#000000"];
     const mockAction = setGeneratedColors(mockColors);
     const mappedProps = mapDispatchToProps(mockDispatch);
-    mappedProps.handleSetGeneratedColors(mockColors);
-    expect(mockDispatch).toHaveBeenCalledWith(mockAction);
-  })
-
-  it('should dispatch with a openPaletteGenerator action when handleOpenPaletteGenerator is called', async () => {
-    const mockDispatch = jest.fn();
-    const mockAction = openPaletteGenerator();
-    const mappedProps = mapDispatchToProps(mockDispatch);
-    mappedProps.handleOpenPaletteGenerator();
+    mappedProps.setGeneratedColors(mockColors);
     expect(mockDispatch).toHaveBeenCalledWith(mockAction);
   })
   

@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchProject, fetchPalettes } from '../../api/apiCalls';
+import { fetchProject, fetchPalettes, fetchPatchProject } from '../../api/apiCalls';
 import './Project.scss';
 
-class Project extends Component {
+export class Project extends Component {
     constructor() {
         super();
         this.state = {
             name: '',
-            palettes: []
+            palettes: [],
+            empty: false,
+            input: false
         }
     }
 
@@ -16,7 +18,28 @@ class Project extends Component {
         const id = this.props.id.split('/')[2]
         const project = await fetchProject(id)
         const palettes = await fetchPalettes(id)
-        this.setState({ name: project.name, palettes })
+        if (typeof palettes === 'string') {
+            this.setState({ id:id, name: project.name, empty: true })
+        } else {
+            this.setState({ id: id, name: project.name, palettes })
+        }
+
+    }
+
+    handleChange = (e) => {
+        this.setState({name: e.target.value});
+    }
+
+    updateProjectName = (e, id) => {
+        let update = { name: this.state.name }
+        if (e.keyCode === 13) {
+            fetchPatchProject(id, update);
+            this.changeState();
+        }
+    }
+
+    changeState = () => {
+        this.setState({ input: !this.state.input });
     }
 
     displayPalettes = () => {
@@ -35,17 +58,25 @@ class Project extends Component {
     }
 
     render() {
+        const { name, empty } = this.state;
         return (
-            <article className="single-project">
-                <h3 className="single-proj-name">{this.state.name}</h3>
-                {this.displayPalettes()}
+            <article className={`${empty}  single-project`}>
+                <h3 
+                    className={`${!this.state.input}-name single-proj-name`}
+                    onClick={this.changeState}>                 {name}
+                </h3>
+                <input 
+                    className={`${this.state.input}-input`}
+                    type="text"
+                    onChange={this.handleChange}
+                    onKeyUp={(e, id) => this.updateProjectName(e, this.state.id)}
+                    placeholder={name}
+                />
+                {!empty && this.displayPalettes()}
+                {empty && <p className="empty">No palettes yet :)</p>}
             </article>
         )
     }
 }
 
-export const mapStateToProps = (state) => ({
-    // colors: state.colors
-});
-
-export default connect(mapStateToProps)(Project);
+export default Project ;

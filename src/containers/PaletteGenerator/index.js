@@ -58,7 +58,7 @@ export class PaletteGenerator extends Component {
         var palette = colors.map(color => '#' + color).slice(10, 15);
 
         Object.keys(this.state).forEach((key, index) => {
-            if (key !== 'name' && this.state[key][0] !== 'l') {
+            if (key[0] === 'c' && this.state[key].split('-')[0] !== 'locked') {
                 this.setState({ [key]: palette[index] })
             }
         })
@@ -66,25 +66,10 @@ export class PaletteGenerator extends Component {
         this.props.setGeneratedColors(palette)
     }
 
-    // togglePaletteGenerator = () => {
-    //     this.props.handleOpenPaletteGenerator()
-    //   }
-
     handleOnChange = e => {
         this.setState({name: e.target.value});
         
     }
-
-    // submitNewPalette = () => {
-    //     const { name } = this.state
-    //     this.props.addPalette(name)
-    //     this.props.handleOpenPaletteGenerator()
-    //     this.clearInput()
-    // }
-
-    // clearInput = () => {
-    //     this.setState({name: ""})
-    // }
 
     lockColor = (e, num) => {
         let lockedColor = `color_${num}`
@@ -120,7 +105,7 @@ export class PaletteGenerator extends Component {
                         className={`freeze-color`}
 
                         style={{background: color_1}}
-                        onClick={(e, num, color) => this.lockColor(e, 1)}>
+                        onClick={(e, num) => this.lockColor(e, 1)}>
                         <img className="lock" src={lock} />
                     </button>
                 </section>
@@ -128,7 +113,7 @@ export class PaletteGenerator extends Component {
                     <button 
                         className="freeze-color" 
                         style={{background: color_2}}
-                        onClick={(e, num, color) => this.lockColor(e, 2)}>
+                        onClick={(e, num) => this.lockColor(e, 2)}>
                         <img className="lock" src={lock} />
                     </button>
                 </section>
@@ -136,7 +121,7 @@ export class PaletteGenerator extends Component {
                     <button 
                         className="freeze-color" 
                         style={{background: color_3}}
-                        onClick={(e, num, color) => this.lockColor(e, 3)}>
+                        onClick={(e, num) => this.lockColor(e, 3)}>
                         <img className="lock" src={lock} />
                     </button>
                 </section>
@@ -144,7 +129,7 @@ export class PaletteGenerator extends Component {
                     <button 
                         className="freeze-color" 
                         style={{background: color_4}}
-                        onClick={(e, num, color) => this.lockColor(e, 4)}>
+                        onClick={(e, num) => this.lockColor(e, 4)}>
                         <img className="lock" src={lock} />
                     </button>
                 </section>
@@ -152,7 +137,7 @@ export class PaletteGenerator extends Component {
                     <button 
                         className="freeze-color" 
                         style={{background: color_5}}
-                        onClick={(e, num, color) => this.lockColor(e, 5)}>
+                        onClick={(e, num) => this.lockColor(e, 5)}>
                         <img className="lock" src={lock} />
                     </button>
                 </section>
@@ -175,7 +160,6 @@ export class PaletteGenerator extends Component {
 }
 
 export const mapStateToProps = state => ({
-    openPaletteGen: state.openPaletteGen,
     select: state.select
 });
 

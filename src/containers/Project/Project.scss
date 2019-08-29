@@ -7,7 +7,7 @@
     width: 830px;
 }
 
-.single-proj-name {
+.single-proj-name, .true-name, .true-input {
     font-size: 40px;
     margin: 0;
     margin-bottom: 30px;
@@ -21,4 +21,24 @@
 .proj-color {
     height: 100px;
     width: 100px;
+}
+
+.true.single-project {
+    text-align: center;
+}
+
+.false-input, .false-name {
+    display: none;
+}
+
+.true-input {
+    cursor: pointer;
+    // left: 33px;
+    padding-left: 8px;
+    color: #626262;
+    // font-size: 34px;
+    // margin-bottom: 20px;
+    position: absolute;
+    // width: 250px;
+
 }

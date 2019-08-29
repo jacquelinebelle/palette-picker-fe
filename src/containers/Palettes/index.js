@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import './Palettes.scss';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { openPaletteGenerator } from '../../actions';
-import { fetchPalettes, fetchDeletePalette, fetchPatchPalette } from '../../api/apiCalls';
+// import { connect } from 'react-redux';
+import { fetchPalettes, fetchDeletePalette } from '../../api/apiCalls';
 
 export class Palettes extends Component {
   constructor() {
@@ -24,13 +23,9 @@ export class Palettes extends Component {
     }
   }
 
-  // changeState = () => {
-  //   this.setState({ input: true });
+  // handleChange = (e) => {
+  //   this.setState({ name: e.target.value })
   // }
-
-  handleChange = (e) => {
-    this.setState({ name: e.target.value })
-  }
 
   // updatePalette = (e, id) => {
   //   let update = { name: this.state.name }
@@ -51,18 +46,11 @@ export class Palettes extends Component {
             <Link className="pal-link" exact to={`/projects/palettes/${pal.id}`} key={pal.id}>
               <h5 
                 className={`${!this.state.input}-pal-name palette-name`}
-                // onClick={this.changeState}>
+  
                 >
                 {pal.name}
               </h5>
               </Link>
-              {/* <input 
-                className={`${this.state.input}-pal-input`}
-                type="text"
-                onChange={this.handleChange}
-                onKeyUp={(e, id) => this.updatePalette(e, pal.id)}
-                placeholder={pal.name}
-              /> */}
               <div className="palette-container">
                 <button 
                   className="delete-palette-btn" 
@@ -101,13 +89,5 @@ export class Palettes extends Component {
   }
 }
 
-export const mapStateToProps = state => ({
-  palettes: state.palettes,
-  selectedProject: state.selectedProject,
-  openPaletteGen: state.openPaletteGen
-})
 
-export const mapDispatchToProps = dispatch => ({
-  handleOpenPaletteGenerator: () => dispatch(openPaletteGenerator())
-})
-export default connect(mapStateToProps, mapDispatchToProps)(Palettes);
+export default Palettes;
