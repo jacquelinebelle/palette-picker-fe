@@ -72,4 +72,4 @@ Clicking the title allows you to change the title.
 
 You can also view and edit specific palettes by clicking on them on the projects page.
 
-![list of projects appear](https://imgur.com/tQoj6oS)
+![list of projects appear](https://imgur.com/lyqujWd)
