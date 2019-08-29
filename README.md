@@ -60,11 +60,11 @@ Choose your project folder from the dropdown.
 
 Your project is now saved to the list of projects that may be viewed by clicking the "Projects" link.
 
-![list of projects appear](https://imgur.com/E1Oh3TE)
+![series of projects in list format are shown with name of project and palettes saved](https://imgur.com/E1Oh3TE)
 
 By clicking the project name, you are taken to a page where you can edit your project.
 
-![list of projects appear](https://imgur.com/Pl3c0Ah)
+![single project page shows title of project and palettes](https://imgur.com/Pl3c0Ah)
 
 Clicking the title allows you to change the title.
 
