@@ -38,38 +38,19 @@ Then, you may go to `http://localhost:3001/` in your browser to view responses.
 
 ## Screenshots
 
-Upon first opening the app, you're able to see our palette generator. Clicking the circular arrow button to the bottom right will generate a new palette.
+![Layout of app upon opening](https://i.postimg.cc/rpMZMc3Y/Screen-Shot-2019-09-30-at-3-54-40-PM.png)
+Upon first opening the app, you can see the palette generator as well as options to create new projects or name and save the current palette to a new project. A user is also able to generate new palettes by clicking the circular arrow button.
 
-![main page](https://imgur.com/LAGXWwz)
+![Layout for projects page](https://i.postimg.cc/0yYxVk7t/Screen-Shot-2019-09-30-at-3-58-24-PM.png)
+Clicking the "Projects" link will take you to a page that shows a list of projects you have saved. From there, you can click on one of the cards that will lead to a corresponding project page.
 
-If you want a different palette, but with some of the colors already generated, you can click a lock icon which appears on hover. These colors will remain the same as the others are replaced.
+![Layout for specific project page](https://i.postimg.cc/mr1nm8xT/Screen-Shot-2019-09-30-at-3-58-40-PM.png)
+On this page, you can edit the project name by clicking on the title, which reveals an input. Typing a new name and pressing the enter/return key will save the new name.
 
-![the first and last colors of the palette are locked](https://imgur.com/qMfLFpZ)
+![The same project page as shown above, but with a different name](https://i.postimg.cc/SNjfLjbh/Screen-Shot-2019-09-30-at-3-59-09-PM.png)
 
-To create a new project folder, you may type in your choice of name in the first input and either hit enter or click the plus sign towards the right.
+![Palette detail page](https://i.postimg.cc/HL0wWyXQ/Screen-Shot-2019-09-30-at-3-59-46-PM.png)
+Clicking on an individual palette saved to a project takes you to a page with a similar layout as the home page, but showing the name and colors specific to the chosen palette.
 
-![input reads "My first project"](https://imgur.com/abpSWis)
-
-To save a palette to your project, input a name into the second input field and either hit enter or click the plus sign.
-
-![input reads "jeremy's birthday"](https://imgur.com/PiZjxhE)
-
-Choose your project folder from the dropdown.
-
-![list of projects appear](https://imgur.com/PHEnRBy)
-
-Your project is now saved to the list of projects that may be viewed by clicking the "Projects" link.
-
-![series of projects in list format are shown with name of project and palettes saved](https://imgur.com/E1Oh3TE)
-
-By clicking the project name, you are taken to a page where you can edit your project.
-
-![single project page shows title of project and palettes](https://imgur.com/Pl3c0Ah)
-
-Clicking the title allows you to change the title.
-
-![list of projects appear](https://imgur.com/uB5TXYI)
-
-You can also view and edit specific palettes by clicking on them on the projects page.
-
-![list of projects appear](https://imgur.com/lyqujWd)
+![Edited palette detail page](https://i.postimg.cc/W4cmPnFN/Screen-Shot-2019-09-30-at-3-59-59-PM.png)
+Here, you can change the name of your palette or generate new colors. Clicking on a lock icon (appears when hovering over specific colors) allows you to "freeze" those colors in place as you generate the colors that haven't been frozen.
